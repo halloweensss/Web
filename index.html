@@ -6,68 +6,265 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>FOLLOW</title>
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" rel="stylesheet" >
     <!-- Bootstrap core CSS -->
     <link href="mdb/css/bootstrap.min.css" rel="stylesheet">
+    <link href="fa/css/all.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
-    <link href="mdb/css/mdb.min.css" rel="stylesheet">
+    <!-- <link href="mdb/css/mdb.min.css" rel="stylesheet">-->
     <!-- Your custom styles (optional) -->
     <link href="css/app1.css" rel="stylesheet">
     <title>FOLLOW</title>
 </head>
 <body>
     <header>
-        <a class="navbar-brand mr-0 mr-md-2 icon-header" href="/" aria-label="Follow"></a>
-        <nav class="navbar nabar-expand-lg navbar-dark fixed-top scrolling-navbar bg-blue">
-            <div class="container">
-                <a class="navbar-brand" href="#">
-                    <img class="icon-header" src="img/icon.svg" alt="Follow logo">
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target = "#basicExampleNav" aria-controls="basicExampleNav"
-                aria-expanded="false" aria-label="Toggle Navigation">
-                    <span class="navbar-toggler-icon"></span>
+        <nav class="navbar fixed-top navbar-light bg-white">
+            <a class="navbar-brand" href="#">
+                <img class="d-inline-block align-top icon-header" src="img/icon.svg">
+            </a>
+            <div class="dropdown ml-auto">
+                <button class="d-flex btn dropdown-header shadow-none" type="button" id="dropdownUserInfo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="name-profile" id="userName">Halloween</a>
+                    <img class="rounded-circle icon-profile" src="img/sand.jpg">
                 </button>
-
-                <div class="collapse navbar-collapse" id="basicExampleNav">
-                    <ul class="navbar-nav mr-auto smooth-scroll">
-                        <li class="nav-item">
-                            <a href="#intro" class="nav-link waves-effect waves-light">Account</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#intro" class="nav-link waves-effect waves-light">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#intro" class="nav-link waves-effect waves-light">Contact</a>
-                        </li>
-                    </ul>
+                <div class="dropdown-menu" aria-labelledby="dropdownUserInfo">
+                    <a class="dropdown-item" href="#">Профиль</a>
+                    <a class="dropdown-item" href="#">Настройки</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Выйти</a>
                 </div>
             </div>
         </nav>
     </header>
 
 <main>
-    <h1>123</h1>
-    <h1>123</h1>
-    <h1>123</h1>
-    <h1>123</h1>
-    <h1>123</h1>
-    <h1>123</h1>
-    <h1>123</h1>
-    <h1>123</h1>
-    <h1>123</h1>
-    <h1>123</h1>
-    <h1>123</h1>
-    <h1>123</h1>
-    <h1>123</h1>
-    <h1>123</h1>
-    <h1>123</h1>
-    <h1>123</h1>
-    <h1>123</h1>
-    <h1>123</h1>
-    <h1>123</h1>
-    <h1>123</h1>
-    <h1>123</h1>
-    <h1>123</h1>
+    <div class = "py-3">
+    <div class="container">
+        <div class="d-flex flex-wrap">
+            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                <div class="post">
+                    <div class="post-header">
+                        <div class="profile">
+                            <div class="avatar">
+                                <img class="avatar-img" src="img/sand.jpg">
+                            </div>
+                            <div class="account">
+                                <a class="account-name">Halloween</a>
+                                <a class="account-login" href="https://twitter.com/halloween">@Halloween</a>
+                            </div>
+                        </div>
+                        <a class="service-img twitter" href="https://twitter.com">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                    <div class="post-body">
+                       <div class="post-text">
+                           Горы, горы, горы.
+                       </div>
+                        <div class="post-body-content">
+                            <img class="post-body-content-center" src="img/IMG_0236.JPG">
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="post-footer">
+                        <div class="post-footer-content">
+                            <a class="d-flex post-footer-action" href="123">
+                                <i class="far fa-heart post-footer-icon"></i>
+                                <p class="post-footer-text">12.9k</p>
+                            </a>
+                            <a class="d-flex post-footer-action retweet" href="123">
+                                <i class="fas fa-retweet post-footer-icon"></i>
+                                <p class="post-footer-text">12.3k</p>
+                            </a>
+                        </div>
+                        <div class="ml-auto post-footer-date">
+                            <p>12:12 18.12.19</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                <div class="post">
+                    <div class="post-header">
+                        <div class="profile">
+                            <div class="avatar">
+                                <img class="avatar-img" src="img/sand.jpg">
+                            </div>
+                            <div class="account">
+                                <a class="account-name">Halloween</a>
+                                <a class="account-login">@Halloween</a>
+                            </div>
+                        </div>
+                        <a class="service-img instagram" href="#">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                    <div class="post-body">
+                        <div class="post-body-content">
+                            <img class="post-body-content-center" src="img/sand.jpg">
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="post-footer">
+                        <div class="post-footer-content">
+                            <a class="d-flex post-footer-action" href="123">
+                                <i class="far fa-heart post-footer-icon"></i>
+                                <p class="post-footer-text">12.9k</p>
+                            </a>
+                            <a class="d-flex post-footer-action retweet" href="123">
+                                <i class="far fa-comment post-footer-icon"></i>
+                                <p class="post-footer-text">12.3k</p>
+                            </a>
+                        </div>
+                        <div class="ml-auto post-footer-date">
+                            <p>12:12 18.12.19</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                <div class="post">
+                    <div class="post-header">
+                        <div class="profile">
+                            <div class="avatar">
+                                <img class="avatar-img" src="img/sand.jpg">
+                            </div>
+                            <div class="account">
+                                <a class="account-name">Halloween</a>
+                                <a class="account-login" href="#">@Halloween</a>
+                            </div>
+                        </div>
+                        <a class="service-img telegram" href="#">
+                            <i class="fab fa-telegram-plane"></i>
+                        </a>
+                    </div>
+                    <div class="post-body">
+                        <div class="post-text">
+                            Кодзима - гений!
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="post-footer">
+                        <div class="post-footer-content">
+                            <a class="d-flex post-footer-action">
+                                <i class="far fa-eye post-footer-icon"></i>
+                                <p class="post-footer-text">12.9k</p>
+                            </a>
+                        </div>
+                        <div class="ml-auto post-footer-date">
+                            <p>12:12 18.12.19</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                <div class="post">
+                    <div class="post-header">
+                        <div class="profile">
+                            <div class="avatar">
+                                <img class="avatar-img" src="img/sand.jpg">
+                            </div>
+                            <div class="account">
+                                <a class="account-name">Halloween</a>
+                                <a class="account-login" href="#">@Halloween</a>
+                            </div>
+                        </div>
+                        <a class="service-img telegram" href="#">
+                            <i class="fab fa-telegram-plane"></i>
+                        </a>
+                    </div>
+                    <div class="post-body">
+                        <div class="post-text">
+                            Кодзима - гений!
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="post-footer">
+                        <div class="post-footer-content">
+                            <a class="d-flex post-footer-action">
+                                <i class="far fa-eye post-footer-icon"></i>
+                                <p class="post-footer-text">12.9k</p>
+                            </a>
+                        </div>
+                        <div class="ml-auto post-footer-date">
+                            <p>12:12 18.12.19</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                <div class="post">
+                    <div class="post-header">
+                        <div class="profile">
+                            <div class="avatar">
+                                <img class="avatar-img" src="img/sand.jpg">
+                            </div>
+                            <div class="account">
+                                <a class="account-name">Halloween</a>
+                                <a class="account-login" href="#">@Halloween</a>
+                            </div>
+                        </div>
+                        <a class="service-img telegram" href="#">
+                            <i class="fab fa-telegram-plane"></i>
+                        </a>
+                    </div>
+                    <div class="post-body">
+                        <div class="post-text">
+                            Кодзима - гений!
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="post-footer">
+                        <div class="post-footer-content">
+                            <a class="d-flex post-footer-action">
+                                <i class="far fa-eye post-footer-icon"></i>
+                                <p class="post-footer-text">12.9k</p>
+                            </a>
+                        </div>
+                        <div class="ml-auto post-footer-date">
+                            <p>12:12 18.12.19</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                <div class="post">
+                    <div class="post-header">
+                        <div class="profile">
+                            <div class="avatar">
+                                <img class="avatar-img" src="img/sand.jpg">
+                            </div>
+                            <div class="account">
+                                <a class="account-name">Halloween</a>
+                                <a class="account-login" href="#">@Halloween</a>
+                            </div>
+                        </div>
+                        <a class="service-img telegram" href="#">
+                            <i class="fab fa-telegram-plane"></i>
+                        </a>
+                    </div>
+                    <div class="post-body">
+                        <div class="post-text">
+                            Кодзима - гений!
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="post-footer">
+                        <div class="post-footer-content">
+                            <a class="d-flex post-footer-action">
+                                <i class="far fa-eye post-footer-icon"></i>
+                                <p class="post-footer-text">12.9k</p>
+                            </a>
+                        </div>
+                        <div class="ml-auto post-footer-date">
+                            <p>12:12 18.12.19</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
 </main>
 
 <!-- SCRIPTS -->

@@ -1,0 +1,182 @@
+html{
+    font-size: 16px;
+}
+
+hr{
+    color: #000000;
+}
+
+.name-profile{
+    margin-right: 5px;
+    font-size: 20px;
+}
+.icon-header{
+    width: 32px;
+    height: 32px;
+    max-width: 32px;
+    max-height: 32px;
+}
+
+.icon-profile{
+    width: 32px;
+    height: 32px;
+    max-width: 32px;
+    max-height: 32px;
+}
+
+.post{
+    background-color: #ffffff;
+    border: none;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+.post-header{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+}
+
+.post-body{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 10px 15px;
+}
+
+.post-footer{
+    display: flex;
+    flex-direction: row;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.post-footer-content{
+    display: flex;
+    flex-direction: row;
+    font-size: 24px;
+    opacity: .5;
+}
+
+.post-footer-date{
+    vertical-align: center;
+    font-size: 10px;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    opacity: .5;
+}
+.post-footer-icon{
+    margin-right: 5px;
+}
+
+.post-footer-action{
+    color:#000000;
+    text-decoration: none;
+    padding-right: 10px;
+}
+
+.post-footer-action.retweet:hover,
+.post-footer-action:focus{
+    text-decoration: none;
+    color: #2196F3;
+}
+.post-footer-action:hover,
+.post-footer-action:focus{
+    text-decoration: none;
+    color: #F86C6C;
+}
+
+.post-footer-text{
+    padding-top: 2px;
+    font-size: 14px;
+}
+
+.post-text{
+    font-size: 1.0625rem;
+    line-height: 1.625rem;
+    font-weight: 400;
+}
+
+.post-body-content{
+    margin-top: 10px;
+    align-items: center;
+    overflow: hidden;
+}
+
+.post-body-content-center{
+    width: 100%;
+    height: 100%;
+    horiz-align: center;
+}
+
+.service-img{
+    color: #000000;
+    font-size: 32px;
+    opacity: .3;
+}
+
+.service-img.twitter{
+
+}
+
+.service-img.twitter:hover,
+.service-img.twitter:focus{
+    color: #2168F3;
+    opacity: .6;
+}
+
+.service-img.telegram:hover,
+.service-img.telegram:focus{
+    color: #2168F3;
+    opacity: .6;
+}
+
+.service-img.instagram:hover,
+.service-img.instagram:focus{
+    color: #F32159;
+    opacity: .6;
+}
+
+.avatar-img{
+    width: 32px;
+    height: 32px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.avatar{
+    margin-right: 7px;
+}
+
+.account{
+    display: flex;
+    flex-direction: column;
+}
+
+.account-name{
+    font-weight: 500;
+    color: #000000;
+}
+
+.account-login{
+    font-size: .8rem;
+    margin-top: -6px;
+    color: #000000;
+    opacity: .6;
+}
+
+.account-login:hover,
+.account-login:focus{
+    text-decoration: none;
+}
+.profile{
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+body{
+    background-color: #EDF0FA;
+    padding-top: 80px;
+    font-family: 'Roboto', sans-serif;
+}
