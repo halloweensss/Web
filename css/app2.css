@@ -10,6 +10,108 @@ body{
     font-family: 'Roboto', sans-serif;
 }
 
-.login-content{
-    margin: 50px;
+a{
+    color:#000000;
+    text-decoration: none;
+    opacity: 0.5;
+    text-align: center;
+    display: block;
+    margin: auto;
+}
+
+span{
+    opacity: .6;
+}
+
+a:hover,
+a:focus{
+    color: #6C71F8;
+    text-decoration: none;
+}
+
+.forgot-pass{
+    font-size: 12px;
+}
+.icon-header{
+    width: 40px;
+    height: 40px;
+    max-width: 40px;
+    max-height: 40px;
+    display: block;
+    margin: auto auto 20px;
+}
+
+.login-container{
+    height: 100vh;
+    width: 100%;
+}
+
+.login-form{
+    max-width: 100%;
+    width: 340px;
+    padding: 15px;
+    margin: auto;
+}
+.form-group{
+    margin-bottom: 8px;
+}
+
+.create-account-btn{
+    width: 50%;
+    display: block;
+    margin: auto;
+}
+.input{
+    font-size: 15px;
+    border-radius: 5px;
+    border: none;
+    opacity: 1;
+}
+
+.input::placeholder{
+    color: #000000;
+    opacity: .4;
+}
+
+.input.submit{
+    background-color: #48FF5E;
+    color: #FFFFFF;
+}
+
+.input.submit.login{
+    background-color: #6C71F8;
+    color: #FFFFFF;
+}
+
+.strike {
+    display: block;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.strike > span {
+    position: relative;
+    display: inline-block;
+}
+
+.strike > span:before,
+.strike > span:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 9999px;
+    height: 1px;
+    background: black;
+    opacity: 0.2;
+}
+
+.strike > span:before {
+    right: 100%;
+    margin-right: 15px;
+}
+
+.strike > span:after {
+    left: 100%;
+    margin-left: 15px;
 }

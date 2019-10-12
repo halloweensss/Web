@@ -17,22 +17,17 @@
 
 <main>
     <div class="login-container d-flex align-items-center justify-content-center">
-        <form class="login-form" method="post">
+        <form class="login-form">
             <img class="icon-header" src="img/icon.svg">
             <div class="form-group">
                 <input type="text" class="form-control input" placeholder="Электронный адрес" required>
             </div>
             <div class="form-group">
-                <input type="password" class="form-control input" placeholder="Пароль" required>
+                <input type="submit" class="form-control input submit login" value="Отправить пароль" required>
             </div>
-            <div class="form-group">
-                <input type="submit" class="form-control input submit login" value="Войти" required>
+            <div>
+                <a href="login.html">Отмена</a>
             </div>
-            <div class="strike">
-                <span> или </span>
-            </div>
-            <a class="form-control input submit create-account-btn" href="register.html">Создать аккаунт</a>
-            <a class="forgot-pass" href="restore.html">Забыли пароль?</a>
         </form>
     </div>
 </main>

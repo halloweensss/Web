@@ -20,19 +20,23 @@
         <form class="login-form" method="post">
             <img class="icon-header" src="img/icon.svg">
             <div class="form-group">
+                <input type="text" class="form-control input" placeholder="Логин" required>
+            </div>
+            <div class="form-group">
                 <input type="text" class="form-control input" placeholder="Электронный адрес" required>
             </div>
             <div class="form-group">
                 <input type="password" class="form-control input" placeholder="Пароль" required>
             </div>
             <div class="form-group">
-                <input type="submit" class="form-control input submit login" value="Войти" required>
+                <input type="password" class="form-control input" placeholder="Подтвердите пароль" required>
             </div>
-            <div class="strike">
-                <span> или </span>
+            <div class="form-group">
+                <input type="submit" class="form-control input submit" value="Регистрация" required>
             </div>
-            <a class="form-control input submit create-account-btn" href="register.html">Создать аккаунт</a>
-            <a class="forgot-pass" href="restore.html">Забыли пароль?</a>
+            <div>
+                <a href="login.html">Отмена</a>
+            </div>
         </form>
     </div>
 </main>

@@ -7,10 +7,6 @@ hr{
     color: #000000;
 }
 
-.grid-item{
-
-}
-
 .name-profile{
     margin-right: 5px;
     font-size: 20px;
@@ -68,12 +64,12 @@ hr{
 .post-footer-date{
     vertical-align: center;
     font-size: 10px;
-    margin-top: 5px;
     display: flex;
     flex-direction: row;
     opacity: .5;
 }
 .post-footer-icon{
+    font-size: 20px;
     margin-right: 5px;
 }
 
@@ -95,8 +91,7 @@ hr{
 }
 
 .post-footer-text{
-    padding-top: 2px;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .post-text{
