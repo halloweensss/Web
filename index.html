@@ -22,14 +22,25 @@
             <a class="navbar-brand" href="#">
                 <img class="d-inline-block align-top icon-header" src="img/icon.svg">
             </a>
+            <ul class="nav nav-pills ml-auto" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="pills-news-tab" data-toggle="pill" href="#pills-news" role="tab" aria-controls="pills-news" aria-selected="true">
+                        Новости
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-follow-tab" data-toggle="pill" href="#pills-follow" role="tab" aria-controls="pills-follow" aria-selected="false">
+                        Подписки
+                    </a>
+                </li>
+            </ul>
             <div class="dropdown ml-auto">
                 <button class="d-flex btn dropdown-header shadow-none" type="button" id="dropdownUserInfo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <a class="name-profile" id="userName">Halloween</a>
+                    <a class="name-profile" id="userName">Halloweens</a>
                     <img class="rounded-circle icon-profile" src="img/sand.jpg">
                 </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownUserInfo">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownUserInfo">
                     <a class="dropdown-item" href="#">Настройки</a>
-                    <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="login.html">Выйти</a>
                 </div>
             </div>
@@ -37,507 +48,521 @@
     </header>
 
 <main>
-    <div class="container">
-        <div class="grid" data-masonry='{ "itemSelector": ".grid-item"}'>
-            <div class="grid-item col-xl-4 col-lg-6 col-md-6 col-sm-12 no-padding">
-                <div class="post">
-                    <div class="post-header">
-                        <div class="profile">
-                            <div class="avatar">
-                                <img class="avatar-img" src="img/sand.jpg">
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-news" role="tabpanel" aria-labelledby="pills-news-tab">
+            <div class="container">
+                <div class="grid" data-masonry='{ "itemSelector": ".grid-item"}'>
+                    <div class="grid-item col-xl-4 col-lg-6 col-md-6 col-sm-12 no-padding">
+                        <div class="post">
+                            <div class="post-header">
+                                <div class="profile">
+                                    <div class="avatar">
+                                        <img class="avatar-img" src="img/sand.jpg">
+                                    </div>
+                                    <div class="account">
+                                        <a class="account-name">Halloween</a>
+                                        <a class="account-login" href="https://twitter.com/halloween">@Halloween</a>
+                                    </div>
+                                </div>
+                                <a class="service-img twitter" href="https://twitter.com">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
                             </div>
-                            <div class="account">
-                                <a class="account-name">Halloween</a>
-                                <a class="account-login" href="https://twitter.com/halloween">@Halloween</a>
+                            <div class="post-body">
+                               <div class="post-text">
+                                   <p>Горы, горы, горы.</p>
+                               </div>
+                                <div class="post-body-content">
+                                    <img class="post-body-content-center" src="img/IMG_0236.JPG">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="post-footer">
+                                <div class="post-footer-content">
+                                    <a class="d-flex post-footer-action" href="123">
+                                        <i class="far fa-heart post-footer-icon"></i>
+                                        <p class="post-footer-text">12.9k</p>
+                                    </a>
+                                    <a class="d-flex post-footer-action retweet" href="123">
+                                        <i class="fas fa-retweet post-footer-icon"></i>
+                                        <p class="post-footer-text">12.3k</p>
+                                    </a>
+                                </div>
+                                <div class="ml-auto post-footer-date">
+                                    <p>12:12 18.12.19</p>
+                                </div>
                             </div>
                         </div>
-                        <a class="service-img twitter" href="https://twitter.com">
-                            <i class="fab fa-twitter"></i>
-                        </a>
                     </div>
-                    <div class="post-body">
-                       <div class="post-text">
-                           <p>Горы, горы, горы.</p>
-                       </div>
-                        <div class="post-body-content">
-                            <img class="post-body-content-center" src="img/IMG_0236.JPG">
+                    <div class="grid-item col-xl-4 col-lg-6 col-md-6 col-sm-12 no-padding">
+                        <div class="post">
+                            <div class="post-header">
+                                <div class="profile">
+                                    <div class="avatar">
+                                        <img class="avatar-img" src="img/sand.jpg">
+                                    </div>
+                                    <div class="account">
+                                        <a class="account-name">Halloween</a>
+                                        <a class="account-login">@Halloween</a>
+                                    </div>
+                                </div>
+                                <a class="service-img instagram" href="#">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </div>
+                            <div class="post-body">
+                                <div class="post-body-content">
+                                    <img class="post-body-content-center" src="img/sand.jpg">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="post-footer">
+                                <div class="post-footer-content">
+                                    <a class="d-flex post-footer-action" href="123">
+                                        <i class="far fa-heart post-footer-icon"></i>
+                                        <p class="post-footer-text">12.9k</p>
+                                    </a>
+                                    <a class="d-flex post-footer-action retweet" href="123">
+                                        <i class="far fa-comment post-footer-icon"></i>
+                                        <p class="post-footer-text">12.3k</p>
+                                    </a>
+                                </div>
+                                <div class="ml-auto post-footer-date">
+                                    <p>12:12 18.12.19</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <hr>
-                    <div class="post-footer">
-                        <div class="post-footer-content">
-                            <a class="d-flex post-footer-action" href="123">
-                                <i class="far fa-heart post-footer-icon"></i>
-                                <p class="post-footer-text">12.9k</p>
-                            </a>
-                            <a class="d-flex post-footer-action retweet" href="123">
-                                <i class="fas fa-retweet post-footer-icon"></i>
-                                <p class="post-footer-text">12.3k</p>
-                            </a>
+                    <div class="grid-item col-xl-4 col-lg-6 col-md-6 col-sm-12 no-padding">
+                        <div class="post">
+                            <div class="post-header">
+                                <div class="profile">
+                                    <div class="avatar">
+                                        <img class="avatar-img" src="img/sand.jpg">
+                                    </div>
+                                    <div class="account">
+                                        <a class="account-name">Halloween</a>
+                                        <a class="account-login" href="#">@Halloween</a>
+                                    </div>
+                                </div>
+                                <a class="service-img telegram" href="#">
+                                    <i class="fab fa-telegram-plane"></i>
+                                </a>
+                            </div>
+                            <div class="post-body">
+                                <div class="post-text">
+                                    Кодзима - гений!
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="post-footer">
+                                <div class="post-footer-content">
+                                    <a class="d-flex post-footer-action">
+                                        <i class="far fa-eye post-footer-icon"></i>
+                                        <p class="post-footer-text">12.9k</p>
+                                    </a>
+                                </div>
+                                <div class="ml-auto post-footer-date">
+                                    <p>12:12 18.12.19</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="ml-auto post-footer-date">
-                            <p>12:12 18.12.19</p>
+                    </div>
+                    <div class="grid-item col-xl-4 col-lg-6 col-md-6 col-sm-12 no-padding">
+                        <div class="post">
+                            <div class="post-header">
+                                <div class="profile">
+                                    <div class="avatar">
+                                        <img class="avatar-img" src="img/sand.jpg">
+                                    </div>
+                                    <div class="account">
+                                        <a class="account-name">Halloween</a>
+                                        <a class="account-login" href="#">@Halloween</a>
+                                    </div>
+                                </div>
+                                <a class="service-img telegram" href="#">
+                                    <i class="fab fa-telegram-plane"></i>
+                                </a>
+                            </div>
+                            <div class="post-body">
+                                <div class="post-text">
+                                    Кодзима - гений!
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="post-footer">
+                                <div class="post-footer-content">
+                                    <a class="d-flex post-footer-action">
+                                        <i class="far fa-eye post-footer-icon"></i>
+                                        <p class="post-footer-text">12.9k</p>
+                                    </a>
+                                </div>
+                                <div class="ml-auto post-footer-date">
+                                    <p>12:12 18.12.19</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid-item col-xl-4 col-lg-6 col-md-6 col-sm-12 no-padding">
+                        <div class="post">
+                            <div class="post-header">
+                                <div class="profile">
+                                    <div class="avatar">
+                                        <img class="avatar-img" src="img/sand.jpg">
+                                    </div>
+                                    <div class="account">
+                                        <a class="account-name">Halloween</a>
+                                        <a class="account-login" href="#">@Halloween</a>
+                                    </div>
+                                </div>
+                                <a class="service-img telegram" href="#">
+                                    <i class="fab fa-telegram-plane"></i>
+                                </a>
+                            </div>
+                            <div class="post-body">
+                                <div class="post-text">
+                                    Кодзима - гений!
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="post-footer">
+                                <div class="post-footer-content">
+                                    <a class="d-flex post-footer-action">
+                                        <i class="far fa-eye post-footer-icon"></i>
+                                        <p class="post-footer-text">12.9k</p>
+                                    </a>
+                                </div>
+                                <div class="ml-auto post-footer-date">
+                                    <p>12:12 18.12.19</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid-item col-xl-4 col-lg-6 col-md-6 col-sm-12 no-padding">
+                        <div class="post">
+                            <div class="post-header">
+                                <div class="profile">
+                                    <div class="avatar">
+                                        <img class="avatar-img" src="img/sand.jpg">
+                                    </div>
+                                    <div class="account">
+                                        <a class="account-name">Halloween</a>
+                                        <a class="account-login" href="#">@Halloween</a>
+                                    </div>
+                                </div>
+                                <a class="service-img telegram" href="#">
+                                    <i class="fab fa-telegram-plane"></i>
+                                </a>
+                            </div>
+                            <div class="post-body">
+                                <div class="post-text">
+                                    Кодзима - гений!
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="post-footer">
+                                <div class="post-footer-content">
+                                    <a class="d-flex post-footer-action">
+                                        <i class="far fa-eye post-footer-icon"></i>
+                                        <p class="post-footer-text">12.9k</p>
+                                    </a>
+                                </div>
+                                <div class="ml-auto post-footer-date">
+                                    <p>12:12 18.12.19</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid-item col-xl-4 col-lg-6 col-md-6 col-sm-12 no-padding">
+                        <div class="post">
+                            <div class="post-header">
+                                <div class="profile">
+                                    <div class="avatar">
+                                        <img class="avatar-img" src="img/sand.jpg">
+                                    </div>
+                                    <div class="account">
+                                        <a class="account-name">Halloween</a>
+                                        <a class="account-login" href="#">@Halloween</a>
+                                    </div>
+                                </div>
+                                <a class="service-img telegram" href="#">
+                                    <i class="fab fa-telegram-plane"></i>
+                                </a>
+                            </div>
+                            <div class="post-body">
+                                <div class="post-text">
+                                    Кодзима - гений!
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="post-footer">
+                                <div class="post-footer-content">
+                                    <a class="d-flex post-footer-action">
+                                        <i class="far fa-eye post-footer-icon"></i>
+                                        <p class="post-footer-text">12.9k</p>
+                                    </a>
+                                </div>
+                                <div class="ml-auto post-footer-date">
+                                    <p>12:12 18.12.19</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid-item col-xl-4 col-lg-6 col-md-6 col-sm-12 no-padding">
+                        <div class="post">
+                            <div class="post-header">
+                                <div class="profile">
+                                    <div class="avatar">
+                                        <img class="avatar-img" src="img/sand.jpg">
+                                    </div>
+                                    <div class="account">
+                                        <a class="account-name">Halloween</a>
+                                        <a class="account-login" href="#">@Halloween</a>
+                                    </div>
+                                </div>
+                                <a class="service-img telegram" href="#">
+                                    <i class="fab fa-telegram-plane"></i>
+                                </a>
+                            </div>
+                            <div class="post-body">
+                                <div class="post-text">
+                                    Кодзима - гений!
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="post-footer">
+                                <div class="post-footer-content">
+                                    <a class="d-flex post-footer-action">
+                                        <i class="far fa-eye post-footer-icon"></i>
+                                        <p class="post-footer-text">12.9k</p>
+                                    </a>
+                                </div>
+                                <div class="ml-auto post-footer-date">
+                                    <p>12:12 18.12.19</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid-item col-xl-4 col-lg-6 col-md-6 col-sm-12 no-padding">
+                        <div class="post">
+                            <div class="post-header">
+                                <div class="profile">
+                                    <div class="avatar">
+                                        <img class="avatar-img" src="img/sand.jpg">
+                                    </div>
+                                    <div class="account">
+                                        <a class="account-name">Halloween</a>
+                                        <a class="account-login" href="#">@Halloween</a>
+                                    </div>
+                                </div>
+                                <a class="service-img telegram" href="#">
+                                    <i class="fab fa-telegram-plane"></i>
+                                </a>
+                            </div>
+                            <div class="post-body">
+                                <div class="post-text">
+                                    Кодзима - гений!
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="post-footer">
+                                <div class="post-footer-content">
+                                    <a class="d-flex post-footer-action">
+                                        <i class="far fa-eye post-footer-icon"></i>
+                                        <p class="post-footer-text">12.9k</p>
+                                    </a>
+                                </div>
+                                <div class="ml-auto post-footer-date">
+                                    <p>12:12 18.12.19</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid-item col-xl-4 col-lg-6 col-md-6 col-sm-12 no-padding">
+                        <div class="post">
+                            <div class="post-header">
+                                <div class="profile">
+                                    <div class="avatar">
+                                        <img class="avatar-img" src="img/sand.jpg">
+                                    </div>
+                                    <div class="account">
+                                        <a class="account-name">Halloween</a>
+                                        <a class="account-login" href="#">@Halloween</a>
+                                    </div>
+                                </div>
+                                <a class="service-img telegram" href="#">
+                                    <i class="fab fa-telegram-plane"></i>
+                                </a>
+                            </div>
+                            <div class="post-body">
+                                <div class="post-text">
+                                    Кодзима - гений!
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="post-footer">
+                                <div class="post-footer-content">
+                                    <a class="d-flex post-footer-action">
+                                        <i class="far fa-eye post-footer-icon"></i>
+                                        <p class="post-footer-text">12.9k</p>
+                                    </a>
+                                </div>
+                                <div class="ml-auto post-footer-date">
+                                    <p>12:12 18.12.19</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid-item col-xl-4 col-lg-6 col-md-6 col-sm-12 no-padding">
+                        <div class="post">
+                            <div class="post-header">
+                                <div class="profile">
+                                    <div class="avatar">
+                                        <img class="avatar-img" src="img/sand.jpg">
+                                    </div>
+                                    <div class="account">
+                                        <a class="account-name">Halloween</a>
+                                        <a class="account-login" href="#">@Halloween</a>
+                                    </div>
+                                </div>
+                                <a class="service-img telegram" href="#">
+                                    <i class="fab fa-telegram-plane"></i>
+                                </a>
+                            </div>
+                            <div class="post-body">
+                                <div class="post-text">
+                                    Кодзима - гений!
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="post-footer">
+                                <div class="post-footer-content">
+                                    <a class="d-flex post-footer-action">
+                                        <i class="far fa-eye post-footer-icon"></i>
+                                        <p class="post-footer-text">12.9k</p>
+                                    </a>
+                                </div>
+                                <div class="ml-auto post-footer-date">
+                                    <p>12:12 18.12.19</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid-item col-xl-4 col-lg-6 col-md-6 col-sm-12 no-padding">
+                        <div class="post">
+                            <div class="post-header">
+                                <div class="profile">
+                                    <div class="avatar">
+                                        <img class="avatar-img" src="img/sand.jpg">
+                                    </div>
+                                    <div class="account">
+                                        <a class="account-name">Halloween</a>
+                                        <a class="account-login" href="#">@Halloween</a>
+                                    </div>
+                                </div>
+                                <a class="service-img telegram" href="#">
+                                    <i class="fab fa-telegram-plane"></i>
+                                </a>
+                            </div>
+                            <div class="post-body">
+                                <div class="post-text">
+                                    Кодзима - гений!
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="post-footer">
+                                <div class="post-footer-content">
+                                    <a class="d-flex post-footer-action">
+                                        <i class="far fa-eye post-footer-icon"></i>
+                                        <p class="post-footer-text">12.9k</p>
+                                    </a>
+                                </div>
+                                <div class="ml-auto post-footer-date">
+                                    <p>12:12 18.12.19</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid-item col-xl-4 col-lg-6 col-md-6 col-sm-12 no-padding">
+                        <div class="post">
+                            <div class="post-header">
+                                <div class="profile">
+                                    <div class="avatar">
+                                        <img class="avatar-img" src="img/sand.jpg">
+                                    </div>
+                                    <div class="account">
+                                        <a class="account-name">Halloween</a>
+                                        <a class="account-login" href="#">@Halloween</a>
+                                    </div>
+                                </div>
+                                <a class="service-img telegram" href="#">
+                                    <i class="fab fa-telegram-plane"></i>
+                                </a>
+                            </div>
+                            <div class="post-body">
+                                <div class="post-text">
+                                    Кодзима - гений!
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="post-footer">
+                                <div class="post-footer-content">
+                                    <a class="d-flex post-footer-action">
+                                        <i class="far fa-eye post-footer-icon"></i>
+                                        <p class="post-footer-text">12.9k</p>
+                                    </a>
+                                </div>
+                                <div class="ml-auto post-footer-date">
+                                    <p>12:12 18.12.19</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid-item col-xl-4 col-lg-6 col-md-6 col-sm-12 no-padding">
+                        <div class="post">
+                            <div class="post-header">
+                                <div class="profile">
+                                    <div class="avatar">
+                                        <img class="avatar-img" src="img/sand.jpg">
+                                    </div>
+                                    <div class="account">
+                                        <a class="account-name">Halloween</a>
+                                        <a class="account-login" href="#">@Halloween</a>
+                                    </div>
+                                </div>
+                                <a class="service-img telegram" href="#">
+                                    <i class="fab fa-telegram-plane"></i>
+                                </a>
+                            </div>
+                            <div class="post-body">
+                                <div class="post-text">
+                                    Кодзима - гений!
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="post-footer">
+                                <div class="post-footer-content">
+                                    <a class="d-flex post-footer-action">
+                                        <i class="far fa-eye post-footer-icon"></i>
+                                        <p class="post-footer-text">12.9k</p>
+                                    </a>
+                                </div>
+                                <div class="ml-auto post-footer-date">
+                                    <p>12:12 18.12.19</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="grid-item col-xl-4 col-lg-6 col-md-6 col-sm-12 no-padding">
-                <div class="post">
-                    <div class="post-header">
-                        <div class="profile">
-                            <div class="avatar">
-                                <img class="avatar-img" src="img/sand.jpg">
-                            </div>
-                            <div class="account">
-                                <a class="account-name">Halloween</a>
-                                <a class="account-login">@Halloween</a>
-                            </div>
-                        </div>
-                        <a class="service-img instagram" href="#">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <div class="post-body-content">
-                            <img class="post-body-content-center" src="img/sand.jpg">
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="post-footer">
-                        <div class="post-footer-content">
-                            <a class="d-flex post-footer-action" href="123">
-                                <i class="far fa-heart post-footer-icon"></i>
-                                <p class="post-footer-text">12.9k</p>
-                            </a>
-                            <a class="d-flex post-footer-action retweet" href="123">
-                                <i class="far fa-comment post-footer-icon"></i>
-                                <p class="post-footer-text">12.3k</p>
-                            </a>
-                        </div>
-                        <div class="ml-auto post-footer-date">
-                            <p>12:12 18.12.19</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="grid-item col-xl-4 col-lg-6 col-md-6 col-sm-12 no-padding">
-                <div class="post">
-                    <div class="post-header">
-                        <div class="profile">
-                            <div class="avatar">
-                                <img class="avatar-img" src="img/sand.jpg">
-                            </div>
-                            <div class="account">
-                                <a class="account-name">Halloween</a>
-                                <a class="account-login" href="#">@Halloween</a>
-                            </div>
-                        </div>
-                        <a class="service-img telegram" href="#">
-                            <i class="fab fa-telegram-plane"></i>
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <div class="post-text">
-                            Кодзима - гений!
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="post-footer">
-                        <div class="post-footer-content">
-                            <a class="d-flex post-footer-action">
-                                <i class="far fa-eye post-footer-icon"></i>
-                                <p class="post-footer-text">12.9k</p>
-                            </a>
-                        </div>
-                        <div class="ml-auto post-footer-date">
-                            <p>12:12 18.12.19</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="grid-item col-xl-4 col-lg-6 col-md-6 col-sm-12 no-padding">
-                <div class="post">
-                    <div class="post-header">
-                        <div class="profile">
-                            <div class="avatar">
-                                <img class="avatar-img" src="img/sand.jpg">
-                            </div>
-                            <div class="account">
-                                <a class="account-name">Halloween</a>
-                                <a class="account-login" href="#">@Halloween</a>
-                            </div>
-                        </div>
-                        <a class="service-img telegram" href="#">
-                            <i class="fab fa-telegram-plane"></i>
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <div class="post-text">
-                            Кодзима - гений!
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="post-footer">
-                        <div class="post-footer-content">
-                            <a class="d-flex post-footer-action">
-                                <i class="far fa-eye post-footer-icon"></i>
-                                <p class="post-footer-text">12.9k</p>
-                            </a>
-                        </div>
-                        <div class="ml-auto post-footer-date">
-                            <p>12:12 18.12.19</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="grid-item col-xl-4 col-lg-6 col-md-6 col-sm-12 no-padding">
-                <div class="post">
-                    <div class="post-header">
-                        <div class="profile">
-                            <div class="avatar">
-                                <img class="avatar-img" src="img/sand.jpg">
-                            </div>
-                            <div class="account">
-                                <a class="account-name">Halloween</a>
-                                <a class="account-login" href="#">@Halloween</a>
-                            </div>
-                        </div>
-                        <a class="service-img telegram" href="#">
-                            <i class="fab fa-telegram-plane"></i>
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <div class="post-text">
-                            Кодзима - гений!
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="post-footer">
-                        <div class="post-footer-content">
-                            <a class="d-flex post-footer-action">
-                                <i class="far fa-eye post-footer-icon"></i>
-                                <p class="post-footer-text">12.9k</p>
-                            </a>
-                        </div>
-                        <div class="ml-auto post-footer-date">
-                            <p>12:12 18.12.19</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="grid-item col-xl-4 col-lg-6 col-md-6 col-sm-12 no-padding">
-                <div class="post">
-                    <div class="post-header">
-                        <div class="profile">
-                            <div class="avatar">
-                                <img class="avatar-img" src="img/sand.jpg">
-                            </div>
-                            <div class="account">
-                                <a class="account-name">Halloween</a>
-                                <a class="account-login" href="#">@Halloween</a>
-                            </div>
-                        </div>
-                        <a class="service-img telegram" href="#">
-                            <i class="fab fa-telegram-plane"></i>
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <div class="post-text">
-                            Кодзима - гений!
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="post-footer">
-                        <div class="post-footer-content">
-                            <a class="d-flex post-footer-action">
-                                <i class="far fa-eye post-footer-icon"></i>
-                                <p class="post-footer-text">12.9k</p>
-                            </a>
-                        </div>
-                        <div class="ml-auto post-footer-date">
-                            <p>12:12 18.12.19</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="grid-item col-xl-4 col-lg-6 col-md-6 col-sm-12 no-padding">
-                <div class="post">
-                    <div class="post-header">
-                        <div class="profile">
-                            <div class="avatar">
-                                <img class="avatar-img" src="img/sand.jpg">
-                            </div>
-                            <div class="account">
-                                <a class="account-name">Halloween</a>
-                                <a class="account-login" href="#">@Halloween</a>
-                            </div>
-                        </div>
-                        <a class="service-img telegram" href="#">
-                            <i class="fab fa-telegram-plane"></i>
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <div class="post-text">
-                            Кодзима - гений!
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="post-footer">
-                        <div class="post-footer-content">
-                            <a class="d-flex post-footer-action">
-                                <i class="far fa-eye post-footer-icon"></i>
-                                <p class="post-footer-text">12.9k</p>
-                            </a>
-                        </div>
-                        <div class="ml-auto post-footer-date">
-                            <p>12:12 18.12.19</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="grid-item col-xl-4 col-lg-6 col-md-6 col-sm-12 no-padding">
-                <div class="post">
-                    <div class="post-header">
-                        <div class="profile">
-                            <div class="avatar">
-                                <img class="avatar-img" src="img/sand.jpg">
-                            </div>
-                            <div class="account">
-                                <a class="account-name">Halloween</a>
-                                <a class="account-login" href="#">@Halloween</a>
-                            </div>
-                        </div>
-                        <a class="service-img telegram" href="#">
-                            <i class="fab fa-telegram-plane"></i>
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <div class="post-text">
-                            Кодзима - гений!
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="post-footer">
-                        <div class="post-footer-content">
-                            <a class="d-flex post-footer-action">
-                                <i class="far fa-eye post-footer-icon"></i>
-                                <p class="post-footer-text">12.9k</p>
-                            </a>
-                        </div>
-                        <div class="ml-auto post-footer-date">
-                            <p>12:12 18.12.19</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="grid-item col-xl-4 col-lg-6 col-md-6 col-sm-12 no-padding">
-                <div class="post">
-                    <div class="post-header">
-                        <div class="profile">
-                            <div class="avatar">
-                                <img class="avatar-img" src="img/sand.jpg">
-                            </div>
-                            <div class="account">
-                                <a class="account-name">Halloween</a>
-                                <a class="account-login" href="#">@Halloween</a>
-                            </div>
-                        </div>
-                        <a class="service-img telegram" href="#">
-                            <i class="fab fa-telegram-plane"></i>
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <div class="post-text">
-                            Кодзима - гений!
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="post-footer">
-                        <div class="post-footer-content">
-                            <a class="d-flex post-footer-action">
-                                <i class="far fa-eye post-footer-icon"></i>
-                                <p class="post-footer-text">12.9k</p>
-                            </a>
-                        </div>
-                        <div class="ml-auto post-footer-date">
-                            <p>12:12 18.12.19</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="grid-item col-xl-4 col-lg-6 col-md-6 col-sm-12 no-padding">
-                <div class="post">
-                    <div class="post-header">
-                        <div class="profile">
-                            <div class="avatar">
-                                <img class="avatar-img" src="img/sand.jpg">
-                            </div>
-                            <div class="account">
-                                <a class="account-name">Halloween</a>
-                                <a class="account-login" href="#">@Halloween</a>
-                            </div>
-                        </div>
-                        <a class="service-img telegram" href="#">
-                            <i class="fab fa-telegram-plane"></i>
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <div class="post-text">
-                            Кодзима - гений!
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="post-footer">
-                        <div class="post-footer-content">
-                            <a class="d-flex post-footer-action">
-                                <i class="far fa-eye post-footer-icon"></i>
-                                <p class="post-footer-text">12.9k</p>
-                            </a>
-                        </div>
-                        <div class="ml-auto post-footer-date">
-                            <p>12:12 18.12.19</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="grid-item col-xl-4 col-lg-6 col-md-6 col-sm-12 no-padding">
-                <div class="post">
-                    <div class="post-header">
-                        <div class="profile">
-                            <div class="avatar">
-                                <img class="avatar-img" src="img/sand.jpg">
-                            </div>
-                            <div class="account">
-                                <a class="account-name">Halloween</a>
-                                <a class="account-login" href="#">@Halloween</a>
-                            </div>
-                        </div>
-                        <a class="service-img telegram" href="#">
-                            <i class="fab fa-telegram-plane"></i>
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <div class="post-text">
-                            Кодзима - гений!
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="post-footer">
-                        <div class="post-footer-content">
-                            <a class="d-flex post-footer-action">
-                                <i class="far fa-eye post-footer-icon"></i>
-                                <p class="post-footer-text">12.9k</p>
-                            </a>
-                        </div>
-                        <div class="ml-auto post-footer-date">
-                            <p>12:12 18.12.19</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="grid-item col-xl-4 col-lg-6 col-md-6 col-sm-12 no-padding">
-                <div class="post">
-                    <div class="post-header">
-                        <div class="profile">
-                            <div class="avatar">
-                                <img class="avatar-img" src="img/sand.jpg">
-                            </div>
-                            <div class="account">
-                                <a class="account-name">Halloween</a>
-                                <a class="account-login" href="#">@Halloween</a>
-                            </div>
-                        </div>
-                        <a class="service-img telegram" href="#">
-                            <i class="fab fa-telegram-plane"></i>
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <div class="post-text">
-                            Кодзима - гений!
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="post-footer">
-                        <div class="post-footer-content">
-                            <a class="d-flex post-footer-action">
-                                <i class="far fa-eye post-footer-icon"></i>
-                                <p class="post-footer-text">12.9k</p>
-                            </a>
-                        </div>
-                        <div class="ml-auto post-footer-date">
-                            <p>12:12 18.12.19</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="grid-item col-xl-4 col-lg-6 col-md-6 col-sm-12 no-padding">
-                <div class="post">
-                    <div class="post-header">
-                        <div class="profile">
-                            <div class="avatar">
-                                <img class="avatar-img" src="img/sand.jpg">
-                            </div>
-                            <div class="account">
-                                <a class="account-name">Halloween</a>
-                                <a class="account-login" href="#">@Halloween</a>
-                            </div>
-                        </div>
-                        <a class="service-img telegram" href="#">
-                            <i class="fab fa-telegram-plane"></i>
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <div class="post-text">
-                            Кодзима - гений!
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="post-footer">
-                        <div class="post-footer-content">
-                            <a class="d-flex post-footer-action">
-                                <i class="far fa-eye post-footer-icon"></i>
-                                <p class="post-footer-text">12.9k</p>
-                            </a>
-                        </div>
-                        <div class="ml-auto post-footer-date">
-                            <p>12:12 18.12.19</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="grid-item col-xl-4 col-lg-6 col-md-6 col-sm-12 no-padding">
-                <div class="post">
-                    <div class="post-header">
-                        <div class="profile">
-                            <div class="avatar">
-                                <img class="avatar-img" src="img/sand.jpg">
-                            </div>
-                            <div class="account">
-                                <a class="account-name">Halloween</a>
-                                <a class="account-login" href="#">@Halloween</a>
-                            </div>
-                        </div>
-                        <a class="service-img telegram" href="#">
-                            <i class="fab fa-telegram-plane"></i>
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <div class="post-text">
-                            Кодзима - гений!
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="post-footer">
-                        <div class="post-footer-content">
-                            <a class="d-flex post-footer-action">
-                                <i class="far fa-eye post-footer-icon"></i>
-                                <p class="post-footer-text">12.9k</p>
-                            </a>
-                        </div>
-                        <div class="ml-auto post-footer-date">
-                            <p>12:12 18.12.19</p>
-                        </div>
-                    </div>
+        </div>
+        <div class="tab-pane fade show active" id="pills-follow" role="tabpanel" aria-labelledby="pills-follow-tab">
+            <div class="container">
+                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 no-padding">
+                    <form class="form-inline">
+                        <input class="form-control" type="search" placeholder="Поиск" aria-label="Search">
+                        <button class="btn btn-primary" type="submit">Найти</button>
+                    </form>
                 </div>
             </div>
         </div>

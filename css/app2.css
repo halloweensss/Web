@@ -74,7 +74,7 @@ a:focus{
 }
 
 .input.submit{
-    background-color: #48FF5E;
+    background-color: #2ADE3F;
     color: #FFFFFF;
 }
 
@@ -82,6 +82,7 @@ a:focus{
     background-color: #6C71F8;
     color: #FFFFFF;
 }
+
 
 .strike {
     display: block;

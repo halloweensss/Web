@@ -11,6 +11,28 @@ hr{
     margin-right: 5px;
     font-size: 20px;
 }
+
+.btn:hover,
+.btn:focus{
+    color: #2196F3;
+}
+
+@media only screen and (max-width : 768px) {
+    .nav-pills {
+        font-size: 10px;
+    }
+}
+
+@media only screen and (max-width : 768px) {
+    .name-profile {
+        display: none;
+    }
+}
+
+.dropdown-header{
+    padding: 0px;
+}
+
 .icon-header{
     width: 32px;
     height: 32px;
@@ -24,6 +46,7 @@ hr{
     max-width: 32px;
     max-height: 32px;
 }
+
 .dropdown-menu{
     border: none;
 }
@@ -194,8 +217,20 @@ hr{
     align-items: center;
     overflow: hidden;
 }
+
+.dropdown-item:hover,
+.dropdown-item:focus{
+    border-radius: 5px;
+}
+.ml-50px{
+    margin-left: 50px;
+}
+
 body{
     background-color: #EDF0FA;
-    padding-top: 80px;
     font-family: 'Roboto', sans-serif;
+}
+
+main{
+    padding-top: 80px;
 }
