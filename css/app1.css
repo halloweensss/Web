@@ -307,9 +307,28 @@ hr{
     width: 100%;
 }
 
-.follow-card:hover,
-.follow-card:focus{
+.follow-card:hover{
     background-color: #E0E6FF;
+}
+
+.follow-card:hover .service-img.twitter{
+    color: #2168F3;
+    opacity: .6;
+}
+
+.follow-card:hover .service-img.telegram{
+    color: #2168F3;
+    opacity: .6;
+}
+
+.follow-card:hover .service-img.instagram{
+    color: #F32159;
+    opacity: .6;
+}
+
+.follow-card:hover .follow-nickname{
+    color: #2168F3;
+    text-decoration: none;
 }
 
 .follow-card-margin{
@@ -384,7 +403,6 @@ hr{
     padding: 5px 10px;
     display: none;
 }
-
 
 .follow-container-items{
     max-height: 80vh;

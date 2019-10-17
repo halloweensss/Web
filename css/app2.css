@@ -116,3 +116,40 @@ a:focus{
     left: 100%;
     margin-left: 15px;
 }
+
+.avatar-input{
+    background-image: url("../img/sand.jpg");
+    background-position: center;
+    background-size: 100px 100px;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    margin: auto;
+}
+
+.avatar-input:hover,
+avatar-input:focus{
+    opacity: .5;
+}
+
+.avatar-input-hint{
+    visibility: hidden;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 12px;
+    text-transform: uppercase;
+    margin: auto;
+    color: white;
+}
+
+.avatar-input:hover .avatar-input-hint,
+.avatar-input:focus .avatar-input-hint{
+    visibility: visible;
+}
+
+.file-input{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    opacity: 0;
+}

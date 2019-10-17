@@ -11,28 +11,30 @@
     <link href="mdb/css/bootstrap.min.css" rel="stylesheet">
     <link href="fa/css/all.css" rel="stylesheet">
     <link href="css/app2.css" rel="stylesheet">
-    <title>Вход</title>
+    <title>Настройки</title>
 </head>
 <body>
-
 <main>
     <div class="login-container d-flex align-items-center justify-content-center">
         <form class="login-form" method="post">
-            <img class="icon-header" src="img/icon.svg">
             <div class="form-group">
-                <input type="text" class="form-control input" placeholder="Электронный адрес" required>
+                <div class="avatar-input rounded-circle">
+                    <div class="avatar-input-hint">Изменить аватар</div>
+                    <input class="file-input" type="file" multiple accept=".jpg,.jpeg,.png,.gif">
+                </div>
             </div>
             <div class="form-group">
-                <input type="password" class="form-control input" placeholder="Пароль" required>
+                <input type="text" class="form-control input" placeholder="Логин" value="Halloween">
             </div>
             <div class="form-group">
-                <input type="submit" class="form-control input submit login" value="Войти" required>
+                <input type="password" class="form-control input" placeholder="Пароль">
             </div>
-            <div class="strike">
-                <span> или </span>
+            <div class="form-group">
+                <input type="submit" class="form-control input submit" value="Сохранить">
             </div>
-            <a class="form-control input submit create-account-btn" href="register.html">Создать аккаунт</a>
-            <a class="forgot-pass" href="restore.html">Забыли пароль?</a>
+            <div>
+                <a href="index.html">Отмена</a>
+            </div>
         </form>
     </div>
 </main>
