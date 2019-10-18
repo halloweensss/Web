@@ -128,7 +128,7 @@ a:focus{
 }
 
 .avatar-input:hover,
-avatar-input:focus{
+.avatar-input:focus{
     opacity: .5;
 }
 
