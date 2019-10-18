@@ -11,7 +11,7 @@
     <link href="mdb/css/bootstrap.min.css" rel="stylesheet">
     <link href="fa/css/all.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
-    <!-- <link href="mdb/css/mdb.min.css" rel="stylesheet">-->
+    <!--<link href="mdb/css/mdb.min.css" rel="stylesheet">-->
     <!-- Your custom styles (optional) -->
     <link href="css/app1.css" rel="stylesheet">
     <title>Новости</title>
@@ -52,8 +52,7 @@
 <main>
     <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="pills-news" role="tabpanel" aria-labelledby="pills-news-tab">
-            <div class="container">
-                <div class="grid" data-masonry='{ "itemSelector": ".grid-item"}'>
+            <div id="masonry-container" class="container">
                     <div class="grid-item col-xl-4 col-lg-6 col-md-6 col-sm-12 no-padding">
                         <div class="post">
                             <div class="post-header">
@@ -75,7 +74,25 @@
                                    <p>Горы, горы, горы.</p>
                                </div>
                                 <div class="post-body-content">
-                                    <img class="post-body-content-center" src="img/IMG_0236.JPG">
+                                    <div id="carousel1" class="carousel slide" data-ride="carousel" data-interval="false">
+                                        <div class="carousel-inner">
+                                            <div class="carousel-item active">
+                                                <img class="post-body-content-center" src="img/IMG_0236.JPG">
+                                            </div>
+                                            <div class="carousel-item">
+                                                <img class="post-body-content-center" src="img/sand.jpg">
+                                            </div>
+                                            <div class="carousel-item">
+                                                <img class="post-body-content-center" src="img/c78773cd51369fc45eb13bdb6407a089.jpg">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carousel1" role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carousel1" role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    </a>
                                 </div>
                             </div>
                             <hr>
@@ -555,7 +572,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
         <div class="tab-pane fade show" id="pills-follow" role="tabpanel" aria-labelledby="pills-follow-tab">
@@ -743,6 +759,26 @@
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="mdb/js/mdb.min.js"></script>
 <script src="js/masonry.min.js"></script>
+
+<script src="js/imagesLoaded.js"></script>
 <script src="js/main.js"></script>
+<script>
+        function grid() {
+            $('#masonry-container').masonry({
+                itemSelector: '.grid-item',
+                transitionDuration: '0.2s',
+                stagger: '0.03s'
+            });
+        }
+
+        $(document).imagesLoaded(function () {
+            grid();
+        });
+
+        $(document).ready(grid());
+        $('.carousel').on('slid.bs.carousel',function () {
+            grid();
+        });
+</script>
 </body>
 </html>

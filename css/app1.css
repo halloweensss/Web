@@ -146,12 +146,16 @@ hr{
     line-height: 1.625rem;
     font-weight: 400;
 }
-
+.carousel-control-prev,
+.carousel-control-next{
+    margin-top: 50px;
+}
 .post-body-content{
     margin-top: 10px;
     align-items: center;
     overflow: hidden;
     border-radius: 5px;
+    min-height: 200px;
 }
 .container{
     padding-right: 0px;
@@ -171,6 +175,8 @@ hr{
 }
 
 .post-body-content-center{
+    min-width: 200px;
+    min-height: 200px;
     width: 100%;
     height: 100%;
     horiz-align: center;
@@ -422,6 +428,8 @@ hr{
     }
 }
 body{
+    width: 100vw;
+    height: 100vh;
     background-color: #EDF0FA;
     font-family: 'Roboto', sans-serif;
 }
