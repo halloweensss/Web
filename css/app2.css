@@ -134,7 +134,7 @@ avatar-input:focus{
 
 .avatar-input-hint{
     visibility: hidden;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 700;
     line-height: 12px;
     text-transform: uppercase;
