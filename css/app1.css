@@ -263,7 +263,7 @@ hr{
 .follow-container{
     overflow: hidden;
     background-color: #FFFFFF;
-    border-radius: 10px;
+    border-radius: 0px 0px 10px 10px;
 }
 
 .buttons-header{
@@ -304,6 +304,7 @@ hr{
 .search-input:focus {
     background-color: #FAFAFA;
     border-color: #2168F3;
+    border-bottom-color: #FAFAFA;
 }
 
 .follow-nickname{
@@ -384,11 +385,11 @@ hr{
 
 .suggestion-container-items {
     position: absolute;
-    top: -205px;
     left: 0;
     z-index: 1000;
     float: left;
     min-width: 10rem;
+    width: 100%;
     max-height: 70vh;
     overflow: auto;
     font-size: 1rem;
