@@ -153,7 +153,8 @@ hr{
 }
 .carousel-control-prev,
 .carousel-control-next{
-    margin-top: 50px;
+    margin-top: 130px;
+    margin-bottom: 70px;
 }
 .post-body-content{
     margin-top: 10px;
