@@ -2,103 +2,143 @@
 
 namespace app\models;
 
-class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
+use Yii;
+
+/**
+ * This is the model class for table "users".
+ *
+ * @property int $id
+ * @property string $login
+ * @property string $email
+ * @property string $password
+ * @property string $accessToken
+ * @property string $authKey
+ * @property string $createdAt
+ * @property string|null $updateAt
+ * @property string|null $avatarImage
+ *
+ * @property InstagramFollow[] $instagramFollows
+ * @property TelegramFollow[] $telegramFollows
+ */
+class User extends BaseModel
 {
-    public $id;
-    public $username;
-    public $password;
-    public $authKey;
-    public $accessToken;
-
-    private static $users = [
-        '100' => [
-            'id' => '100',
-            'username' => 'admin',
-            'password' => 'admin',
-            'authKey' => 'test100key',
-            'accessToken' => '100-token',
-        ],
-        '101' => [
-            'id' => '101',
-            'username' => 'demo',
-            'password' => 'demo',
-            'authKey' => 'test101key',
-            'accessToken' => '101-token',
-        ],
-    ];
-
-
     /**
      * {@inheritdoc}
      */
-    public static function findIdentity($id)
+    public static function tableName()
     {
-        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+        return 'users';
     }
 
     /**
      * {@inheritdoc}
      */
+    public function rules()
+    {
+        return [
+            [['login', 'email', 'password'], 'required'],
+            [['createdAt', 'updateAt'], 'safe'],
+            [['avatarImage'], 'string'],
+            [['login'], 'string', 'max' => 20],
+            [['email', 'password'], 'string', 'max' => 30],
+            [['accessToken', 'authKey'], 'string', 'max' => 128],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'login' => 'Login',
+            'email' => 'Email',
+            'password' => 'Password',
+            'accessToken' => 'Access Token',
+            'authKey' => 'Auth Key',
+            'createdAt' => 'Created At',
+            'updateAt' => 'Update At',
+            'avatarImage' => 'Avatar Image',
+        ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getInstagramFollows()
+    {
+        return $this->hasMany(InstagramFollow::className(), ['userId' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTelegramFollows()
+    {
+        return $this->hasMany(TelegramFollow::className(), ['userId' => 'id']);
+    }
+
+    public function validateAuthKey($authKey)
+    {
+        $this->authKey===$authKey;
+    }
+
+    public function updateToken()
+    {
+        $this->accessToken = Yii::$app->security->generateRandomString();
+    }
+
+    public function validatePassword($password)
+    {
+        return Yii::$app->security->validatePassword($password, $this->password);
+    }
+
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        foreach (self::$users as $user) {
-            if ($user['accessToken'] === $token) {
-                return new static($user);
-            }
-        }
-
-        return null;
+        return static::findOne(['accessToken'=>$token]);
     }
 
-    /**
-     * Finds user by username
-     *
-     * @param string $username
-     * @return static|null
-     */
-    public static function findByUsername($username)
+    public static function findIdentity($id)
     {
-        foreach (self::$users as $user) {
-            if (strcasecmp($user['username'], $username) === 0) {
-                return new static($user);
-            }
-        }
-
-        return null;
+        return static::findOne($id);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
+    public static function findByEmail($email)
     {
-        return $this->id;
+        return static::findOne(['email'=>$email]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    public static function getAll(){
+        return User::find()->all();
+    }
+
     public function getAuthKey()
     {
         return $this->authKey;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function validateAuthKey($authKey)
+    public function getAccessToken()
     {
-        return $this->authKey === $authKey;
+        return $this->accessToken;
     }
 
-    /**
-     * Validates password
-     *
-     * @param string $password password to validate
-     * @return bool if password provided is valid for current user
-     */
-    public function validatePassword($password)
+    public function getId()
     {
-        return $this->password === $password;
+        return $this->id;
+    }
+
+    public function beforeSave($insert)
+    {
+        if(!parent::beforeSave($insert)){
+            return false;
+        }
+
+        if($insert){
+            $this->password = Yii::$app->security->generatePasswordHash($this->password);
+            $this->accessToken = Yii::$app->security->generateRandomString();
+            $this->authKey = Yii::$app->security->generateRandomString();
+        }
+        return true;
     }
 }
