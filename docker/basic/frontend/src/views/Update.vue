@@ -1,17 +1,47 @@
 <template>
     <div class="login-container d-flex align-items-center justify-content-center">
-        <form class="login-form" method="post" enctype="multipart/form-data">
+        <form class="login-form" method="post" enctype="multipart/form-data" @submit.prevent="submitHandler">
             <div class="form-group">
-                <div class="avatar-input rounded-circle">
+                <template v-if="image == null">
+                <div class="avatar-input rounded-circle" >
                     <div class="avatar-input-hint">Изменить аватар</div>
-                    <input class="file-input" type="file" multiple accept=".jpg,.jpeg,.png,.gif">
+                    <input class="file-input" type="file" accept="image/*" @change="onFileChange">
                 </div>
+                </template>
+                <template v-else-if="image != null">
+                    <div class="avatar-input rounded-circle" :style="{'background-image': 'url('+imageSrc+')'}" >
+                        <div class="avatar-input-hint">Изменить аватар</div>
+                        <input class="file-input" type="file" accept="image/*" @change="onFileChange">
+                    </div>
+                </template>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control input" placeholder="Логин" value="Halloween">
+                <input id="login"
+                       type="text"
+                       v-model.trim="login"
+                       :class="{invalid: ($v.login.$dirty && !$v.login.required) || ($v.login.$dirty && !$v.login.maxLength)}"
+                       class="form-control input"
+                       placeholder="Логин">
+                <small class="helper-text invalid"
+                       v-if="$v.login.$dirty && !$v.login.required">
+                    Поле не должно быть пустым
+                </small>
+                <small class="helper-text invalid"
+                       v-else-if="$v.login.$dirty && !$v.login.maxLength">
+                    Логин должен быть меньше {{this.maxLengthLogin}} символов
+                </small>
             </div>
             <div class="form-group">
-                <input type="password" class="form-control input" placeholder="Пароль">
+                <input id="password"
+                       type="password"
+                       v-model.trim="password"
+                       :class="{invalid: ($v.password.$dirty && !$v.password.required) || ($v.password.$dirty && !$v.password.minLength)}"
+                       class="form-control input"
+                       placeholder="Пароль">
+                <small class="helper-text invalid"
+                       v-if="($v.password.$dirty && !$v.password.minLength) ||($v.password.$dirty && !$v.password.required)">
+                    Пароль должен быть не менее {{this.minLengthPassword}} символов
+                </small>
             </div>
             <div class="form-group">
                 <input type="submit" class="form-control input submit" value="Сохранить">
@@ -24,8 +54,43 @@
 </template>
 
 <script>
+    import {required, minLength, maxLength} from "vuelidate/lib/validators"
     export default {
-        name: "Update"
+        name: "Update",
+        data() {
+            return {
+                login: '',
+                password: '',
+                minLengthPassword: 6,
+                maxLengthLogin: 20,
+                image: null,
+                imageSrc: ''
+            };
+        },
+        validations: {
+            password : {required, minLength: minLength(6)},
+            login: {required, maxLength:maxLength(20)}
+        },
+        methods:{
+            submitHandler(){
+                if(this.$v.$invalid){
+                    this.$v.$touch();
+                    return;
+                }
+                this.$router.push('/update');
+            },
+            onFileChange(event){
+                const file = event.target.files[0];
+
+                const reader = new FileReader();
+                reader.onload = () => {
+                    this.imageSrc = reader.result;
+                    console.log(this.imageSrc);
+                };
+                reader.readAsDataURL(file);
+                this.image = file;
+            }
+        }
     }
 </script>
 
@@ -159,5 +224,21 @@
         width: 100px;
         height: 100px;
         opacity: 0;
+    }
+    .helper-text.invalid{
+        color: rgba(243,33,89,.8);
+    }
+
+    .input.invalid{
+        border: 1px solid rgba(243,33,89,.5);
+    }
+
+    .input.invalid:focus{
+        box-shadow: 0 0 2px 1px rgba(243,33,89,.5);
+        border: 1px solid rgba(243,33,89,.1);
+    }
+
+    .input:focus{
+        box-shadow: 0 0 1px 2px rgba(108,113,248,.5);
     }
 </style>

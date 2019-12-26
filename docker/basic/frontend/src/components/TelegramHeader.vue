@@ -88,7 +88,7 @@
     .account-login:hover,
     .account-login:focus{
         text-decoration: none;
-        color: #2196F3;
+        color: #2168F3;
     }
     .profile{
         display: flex;

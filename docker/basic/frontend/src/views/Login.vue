@@ -1,15 +1,37 @@
 <template>
     <div class="login-container d-flex align-items-center justify-content-center">
-        <form class="login-form" method="get">
+        <form class="login-form" method="send" @submit.prevent="submitHandler">
             <img class="icon-header" src="../assets/img/icon.svg">
             <div class="form-group">
-                <input id="email" type="text" class="form-control input" placeholder="Электронный адрес" required>
+                <input id="email"
+                       type="text"
+                       v-model.trim="email"
+                       :class="{invalid: ($v.email.$dirty && !$v.email.required) || ($v.email.$dirty && !$v.email.email)}"
+                       class="form-control input"
+                       placeholder="Электронный адрес">
+                <small
+                        class="helper-text invalid"
+                        v-if="$v.email.$dirty && !$v.email.required"
+                >Поле не должно быть пустым</small>
+                <small
+                        class="helper-text invalid"
+                        v-else-if="$v.email.$dirty && !$v.email.email"
+                >Введите корректный электронный адрес</small>
             </div>
             <div class="form-group">
-                <input id="password" type="password" class="form-control input" placeholder="Пароль" required>
+                <input id="password"
+                       type="password"
+                       v-model.trim="password"
+                       :class="{invalid: ($v.password.$dirty && !$v.password.required)}"
+                       class="form-control input"
+                       placeholder="Пароль">
+                <small
+                        class="helper-text invalid"
+                        v-if="$v.password.$dirty && !$v.password.required"
+                >Введите пароль</small>
             </div>
             <div class="form-group">
-                <input type="submit" class="form-control input submit login" value="Войти" required>
+                <input type="submit" class="form-control input submit login" value="Войти">
             </div>
             <div class="strike">
                 <span> или </span>
@@ -25,8 +47,26 @@
 </template>
 
 <script>
+    import {email, required} from 'vuelidate/lib/validators'
     export default {
-        name: "Login"
+        name: "Login",
+        data: () => ({
+            email: '',
+            password: '',
+        }),
+        validations: {
+            email: {email, required},
+            password : {required}
+        },
+        methods:{
+            submitHandler(){
+                if(this.$v.$invalid){
+                    this.$v.$touch();
+                    return;
+                }
+                this.$router.push('/');
+            }
+        }
     }
 </script>
 
@@ -60,6 +100,10 @@
     a:focus{
         color: #6C71F8;
         text-decoration: none;
+    }
+
+    .helper-text.invalid{
+        color: rgba(243,33,89,.8);
     }
 
     .forgot-pass{
@@ -99,6 +143,19 @@
         border-radius: 5px;
         border: none;
         opacity: 1;
+    }
+
+    .input.invalid{
+        border: 1px solid rgba(243,33,89,.5);
+    }
+
+    .input.invalid:focus{
+        box-shadow: 0 0 2px 1px rgba(243,33,89,.5);
+        border: 1px solid rgba(243,33,89,.1);
+    }
+
+    .input:focus{
+        box-shadow: 0 0 1px 2px rgba(108,113,248,.5);
     }
 
     .input::placeholder{

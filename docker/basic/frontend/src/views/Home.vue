@@ -46,175 +46,20 @@
       <div class="tab-pane fade show" id="pills-follow" role="tabpanel" aria-labelledby="pills-follow-tab">
         <div class="container">
           <div class="col-12 d-flex flex-wrap p-0">
-            <input class="form-control search-input" type="search" placeholder="Поиск" id="SuggestionInput" aria-label="Search">
+            <input class="form-control search-input" type="search" placeholder="Поиск" id="SuggestionInput" aria-label="Search" @focusin="displayShow" @focusout="displayNone">
           </div>
         </div>
         <div class="container">
           <div class="col-12">
-            <div class="suggestion-container-items">
-              <div class="d-flex follow-card">
-                <div class="d-flex follow-card-margin">
-                  <a class="service-img twitter" href="#">
-                    <i class="fab fa-twitter"></i>
-                  </a>
-                  <a class="follow-nickname" href="#">
-                    Halloween
-                  </a>
-                  <button class="btn btn-primary follow-button" type="button">Подписаться</button>
-                  <button class="btn btn-primary follow-button min" type="button"><i class="fas fa-check"></i></button>
-                </div>
-              </div>
-              <div class="d-flex follow-card">
-                <div class="d-flex follow-card-margin">
-                  <a class="service-img instagram" href="#">
-                    <i class="fab fa-instagram"></i>
-                  </a>
-                  <a class="follow-nickname" href="#">
-                    Halloween
-                  </a>
-                  <button class="btn btn-primary follow-button" type="button">Подписаться</button>
-                  <button class="btn btn-primary follow-button min" type="button"><i class="fas fa-check"></i></button>
-                </div>
-              </div>
-              <div class="d-flex follow-card">
-                <div class="d-flex follow-card-margin">
-                  <a class="service-img telegram" href="#">
-                    <i class="fab fa-telegram-plane"></i>
-                  </a>
-                  <a class="follow-nickname" href="#">
-                    Halloween
-                  </a>
-                  <button class="btn btn-primary follow-button" type="button">Подписаться</button>
-                  <button class="btn btn-primary follow-button min" type="button"><i class="fas fa-check"></i></button>
-                </div>
-              </div>
-              <div class="d-flex follow-card">
-                <div class="d-flex follow-card-margin">
-                  <a class="service-img twitter" href="#">
-                    <i class="fab fa-twitter"></i>
-                  </a>
-                  <a class="follow-nickname" href="#">
-                    Halloween
-                  </a>
-                  <button class="btn btn-primary follow-button" type="button">Подписаться</button>
-                  <button class="btn btn-primary follow-button min" type="button"><i class="fas fa-check"></i></button>
-                </div>
-              </div>
-              <div class="d-flex follow-card">
-                <div class="d-flex follow-card-margin">
-                  <a class="service-img twitter" href="#">
-                    <i class="fab fa-twitter"></i>
-                  </a>
-                  <a class="follow-nickname" href="#">
-                    Halloween
-                  </a>
-                  <button class="btn btn-primary follow-button" type="button">Подписаться</button>
-                  <button class="btn btn-primary follow-button min" type="button"><i class="fas fa-check"></i></button>
-                </div>
-              </div>
-              <div class="d-flex follow-card">
-                <div class="d-flex follow-card-margin">
-                  <a class="service-img twitter" href="#">
-                    <i class="fab fa-twitter"></i>
-                  </a>
-                  <a class="follow-nickname" href="#">
-                    Halloween
-                  </a>
-                  <button class="btn btn-primary follow-button" type="button">Подписаться</button>
-                  <button class="btn btn-primary follow-button min" type="button"><i class="fas fa-check"></i></button>
-                </div>
-              </div>
-              <div class="d-flex follow-card">
-                <div class="d-flex follow-card-margin">
-                  <a class="service-img instagram" href="#">
-                    <i class="fab fa-instagram"></i>
-                  </a>
-                  <a class="follow-nickname" href="#">
-                    Halloween
-                  </a>
-                  <button class="btn btn-primary follow-button" type="button">Подписаться</button>
-                  <button class="btn btn-primary follow-button min" type="button"><i class="fas fa-check"></i></button>
-                </div>
-              </div>
-              <div class="d-flex follow-card">
-                <div class="d-flex follow-card-margin">
-                  <a class="service-img telegram" href="#">
-                    <i class="fab fa-telegram-plane"></i>
-                  </a>
-                  <a class="follow-nickname" href="#">
-                    Halloween
-                  </a>
-                  <button class="btn btn-primary follow-button" type="button">Подписаться</button>
-                  <button class="btn btn-primary follow-button min" type="button"><i class="fas fa-check"></i></button>
-                </div>
-              </div>
-              <div class="d-flex follow-card">
-                <div class="d-flex follow-card-margin">
-                  <a class="service-img twitter" href="#">
-                    <i class="fab fa-twitter"></i>
-                  </a>
-                  <a class="follow-nickname" href="#">
-                    Halloween
-                  </a>
-                  <button class="btn btn-primary follow-button" type="button">Подписаться</button>
-                  <button class="btn btn-primary follow-button min" type="button"><i class="fas fa-check"></i></button>
-                </div>
-              </div>
-              <div class="d-flex follow-card">
-                <div class="d-flex follow-card-margin">
-                  <a class="service-img twitter" href="#">
-                    <i class="fab fa-twitter"></i>
-                  </a>
-                  <a class="follow-nickname" href="#">
-                    Halloween
-                  </a>
-                  <button class="btn btn-primary follow-button" type="button">Подписаться</button>
-                  <button class="btn btn-primary follow-button min" type="button"><i class="fas fa-check"></i></button>
-                </div>
-              </div>
+            <div v-bind:style="{ display: this.display}" class="suggestion-container-items">
+              <FollowCard v-for="(followUser, index) in followUsers" :key="followUser.serviceName + index" v-bind:follow-user="followUser"/>
             </div>
           </div>
         </div>
         <div class="container follow-container">
           <div class="col-12 d-flex flex-wrap align-items-center justify-content-center p-0">
             <div class="follow-container-items">
-              <div class="d-flex follow-card">
-                <div class="d-flex follow-card-margin">
-                  <a class="service-img twitter" href="#">
-                    <i class="fab fa-twitter"></i>
-                  </a>
-                  <a class="follow-nickname" href="#">
-                    Halloween123131231231313278726487678648714861274687126461278468126481267462146182648164871648164781
-                  </a>
-                  <button class="btn btn-danger follow-button" type="button">Отписаться</button>
-                  <button class="btn btn-danger follow-button min" type="button"><i class="fa fa-times" aria-hidden="true"></i></button>
-                </div>
-              </div>
-              <div class="d-flex follow-card">
-                <div class="d-flex follow-card-margin">
-                  <a class="service-img telegram" href="#">
-                    <i class="fab fa-telegram-plane"></i>
-                  </a>
-                  <a class="follow-nickname" href="#">
-                    Halloween
-                  </a>
-                  <button class="btn btn-danger follow-button" type="button">Отписаться</button>
-                  <button class="btn btn-danger follow-button min" type="button"><i class="fa fa-times" aria-hidden="true"></i></button>
-                </div>
-              </div>
-              <div class="d-flex follow-card">
-                <div class="d-flex follow-card-margin">
-                  <a class="service-img instagram" href="#">
-                    <i class="fab fa-instagram"></i>
-                  </a>
-                  <a class="follow-nickname" href="#">
-                    Halloween
-                  </a>
-                  <button class="btn btn-danger follow-button" type="button">Отписаться</button>
-                  <button class="btn btn-danger follow-button min" type="button"><i class="fa fa-times" aria-hidden="true"></i></button>
-                </div>
-              </div>
-
+              <AlreadyFollowCard v-for="(alreadyFollowUser, index) in alreadyFollowUsers" :key="alreadyFollowUser.serviceName + index" v-bind:already-follow-user="alreadyFollowUser"/>
             </div>
           </div>
         </div>
@@ -225,10 +70,13 @@
 </template>
 <script>
   import Post from "../components/Post";
+  import FollowCard from "../components/FollowCard";
+  import AlreadyFollowCard from "../components/AlreadyFollowCard";
   export default {
-    components: {Post},
+    components: {AlreadyFollowCard, FollowCard, Post},
     data(){
       return{
+        display: "none",
         usersInfo:[
           {
             id:1,
@@ -282,7 +130,7 @@
             serviceName: "instagram",
             accountUrl:"https://www.instagram.com/hideo_kojima/",
             avatarUrl:"https://www.1zoom.me/big2/49/179561-melisenta.jpg",
-            imageUrl:["https://www.nastol.com.ua/pic/201502/1024x768/nastol.com.ua-130464.jpg"],
+            imageUrl:["https://www.nastol.com.ua/pic/201502/1024x768/nastol.com.ua-130464.jpg","https://i.pinimg.com/736x/71/d0/a5/71d0a525479089b7a5bc9e1a554a18f7.jpg"],
             postUrl:"https://www.instagram.com/p/B6U0cUUH7YM/",
             postText:"Светочка!",
             postLikes:"9.8K",
@@ -297,7 +145,7 @@
             serviceName: "instagram",
             accountUrl:"https://www.instagram.com/hideo_kojima/",
             avatarUrl:"https://www.1zoom.me/big2/49/179561-melisenta.jpg",
-            imageUrl:["http://wallpaperswide.com/download/white_mountains_peaks_lake_reflection_nature-wallpaper-1440x2560.jpg"],
+            imageUrl:["http://wallpaperswide.com/download/white_mountains_peaks_lake_reflection_nature-wallpaper-1440x2560.jpg","https://i.pinimg.com/736x/71/d0/a5/71d0a525479089b7a5bc9e1a554a18f7.jpg"],
             postUrl:"https://www.instagram.com/p/B6U0cUUH7YM/",
             postText:"Светочка!",
             postLikes:"9.8K",
@@ -365,7 +213,129 @@
             postViews:"13",
             postDate:"12.12.2012 22:48"
           }
+        ],
+        followUsers: [
+          {
+            id:1,
+            username:"HalloWeen",
+            serviceName:"instagram",
+            follow:true,
+            profileUrl:"https://www.instagram.com/hideo_kojima/"
+          },
+          {
+            id:1,
+            username:"HalloWeen",
+            serviceName:"telegram",
+            follow:true,
+            profileUrl:"https://www.instagram.com/hideo_kojima/"
+          },
+          {
+            id:2,
+            username:"HalloWeen",
+            serviceName:"instagram",
+            follow:false,
+            profileUrl:"https://www.instagram.com/hideo_kojima/"
+          },
+          {
+            id:3,
+            username:"HalloWeen",
+            serviceName:"telegram",
+            follow:false,
+            profileUrl:"https://www.instagram.com/hideo_kojima/"
+          }
+        ],
+        alreadyFollowUsers: [
+          {
+            id:1,
+            username:"4124125125125125151",
+            serviceName:"instagram",
+            follow:true,
+            profileUrl:"https://www.instagram.com/hideo_kojima/"
+          },
+          {
+            id:1,
+            username:"412412512512512515141241251251251251514124125125125125151",
+            serviceName:"telegram",
+            follow:true,
+            profileUrl:"https://www.instagram.com/hideo_kojima/"
+          },
+          {
+            id:2,
+            username:"312jnjnvjrenvnjenvjrnjvnrjn",
+            serviceName:"instagram",
+            follow:true,
+            profileUrl:"https://www.instagram.com/hideo_kojima/"
+          },
+          {
+            id:3,
+            username:"uh3runf4n43nnucn48cn4nc8nc48un",
+            serviceName:"telegram",
+            follow:true,
+            profileUrl:"https://www.instagram.com/hideo_kojima/"
+          },
+          {
+            id:4,
+            username:"uh3runf4n43nnucn48cn4nc8nc48un",
+            serviceName:"telegram",
+            follow:true,
+            profileUrl:"https://www.instagram.com/hideo_kojima/"
+          },
+          {
+            id:5,
+            username:"uh3runf4n43nnucn48cn4nc8nc48un",
+            serviceName:"telegram",
+            follow:true,
+            profileUrl:"https://www.instagram.com/hideo_kojima/"
+          },
+          {
+            id:6,
+            username:"uh3runf4n43nnucn48cn4nc8nc48un",
+            serviceName:"telegram",
+            follow:true,
+            profileUrl:"https://www.instagram.com/hideo_kojima/"
+          },
+          {
+            id:7,
+            username:"uh3runf4n43nnucn48cn4nc8nc48un",
+            serviceName:"telegram",
+            follow:true,
+            profileUrl:"https://www.instagram.com/hideo_kojima/"
+          },
+          {
+            id:8,
+            username:"uh3runf4n43nnucn48cn4nc8nc48un",
+            serviceName:"telegram",
+            follow:true,
+            profileUrl:"https://www.instagram.com/hideo_kojima/"
+          },
+          {
+            id:9,
+            username:"uh3runf4n43nnucn48cn4nc8nc48un",
+            serviceName:"telegram",
+            follow:true,
+            profileUrl:"https://www.instagram.com/hideo_kojima/"
+          },
+          {
+            id:10,
+            username:"uh3runf4n43nnucn48cn4nc8nc48un",
+            serviceName:"telegram",
+            follow:true,
+            profileUrl:"https://www.instagram.com/hideo_kojima/"
+          }
         ]
+      }
+    },
+    computed: {
+      computedDisplay: function () {
+        return this.width;
+      }
+    },
+    methods:{
+      displayNone: function () {
+        this.display='none';
+      },
+      displayShow: function () {
+        this.display='block';
       }
     },
     mounted() {
@@ -685,6 +655,7 @@
     background-color: #FAFAFA;
     border-color: #2168F3;
     border-bottom-color: #FAFAFA;
+    box-shadow: none;
   }
 
   .follow-nickname{
@@ -712,6 +683,7 @@
 
   .follow-card:hover{
     background-color: #E0E6FF;
+    text-decoration: none;
   }
 
   .follow-card:hover .service-img.twitter{
@@ -778,7 +750,7 @@
     border-bottom: 1px solid #2168F3;
     border-right: 1px solid #2168F3;
     border-left: 1px solid #2168F3;
-    border-radius: 0 0 .25rem .25rem;
+    border-radius: 0 0 10px 10px;
     display: none;
   }
 

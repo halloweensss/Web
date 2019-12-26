@@ -1,15 +1,51 @@
 <template>
     <div class="login-container d-flex align-items-center justify-content-center">
-        <form class="login-form" method="get">
+        <form class="login-form" method="send" @submit.prevent="submitHandler">
             <img class="icon-header" src="../assets/img/icon.svg">
             <div class="form-group">
-                <input type="text" class="form-control input" placeholder="Логин" required>
+                <input id="login"
+                       type="text"
+                       v-model.trim="login"
+                       :class="{invalid: ($v.login.$dirty && !$v.login.required) || ($v.login.$dirty && !$v.login.maxLength)}"
+                       class="form-control input"
+                       placeholder="Логин">
+                <small class="helper-text invalid"
+                       v-if="$v.login.$dirty && !$v.login.required">
+                    Поле не должно быть пустым
+                </small>
+                <small class="helper-text invalid"
+                       v-else-if="$v.login.$dirty && !$v.login.maxLength">
+                    Логин должен быть меньше {{this.maxLengthLogin}} символов
+                </small>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control input" placeholder="Электронный адрес" required>
+                <input id="email"
+                       type="text"
+                       v-model.trim="email"
+                       :class="{invalid: ($v.email.$dirty && !$v.email.required) || ($v.email.$dirty && !$v.email.email)}"
+                       class="form-control input"
+                       placeholder="Электронный адрес">
+                <small class="helper-text invalid"
+                       v-if="$v.email.$dirty && !$v.email.required">
+                    Поле не должно быть пустым
+                </small>
+                <small class="helper-text invalid"
+                       v-else-if="$v.email.$dirty && !$v.email.email">
+                    Введите корректный электронный адрес
+                </small>
             </div>
             <div class="form-group">
-                <input type="password" class="form-control input" placeholder="Пароль" required>
+                <input id="password"
+                       type="password"
+                       v-model.trim="password"
+                       :class="{invalid: ($v.password.$dirty && !$v.password.required) || ($v.password.$dirty && !$v.password.minLength)}"
+                       class="form-control input"
+                       placeholder="Пароль">
+                <small class="helper-text invalid"
+                       v-if="($v.password.$dirty && !$v.password.minLength) ||($v.password.$dirty && !$v.password.required)">
+                    Пароль должен быть не менее {{this.minLengthPassword}} символов
+                </small>
+
             </div>
             <div class="form-group">
                 <input type="submit" class="form-control input submit" value="Регистрация" required>
@@ -22,8 +58,33 @@
 </template>
 
 <script>
+    import {email, required, minLength, maxLength} from "vuelidate/lib/validators"
+
     export default {
-        name: "Register"
+        name: "Register",
+        data() {
+            return {
+                login: '',
+                email: '',
+                password: '',
+                minLengthPassword: 6,
+                maxLengthLogin: 20
+            };
+        },
+        validations: {
+            email: {email, required},
+            password : {required, minLength: minLength(6)},
+            login: {required, maxLength:maxLength(20)}
+        },
+        methods:{
+            submitHandler(){
+                if(this.$v.$invalid){
+                    this.$v.$touch();
+                    return;
+                }
+                this.$router.push('/');
+            }
+        }
     }
 </script>
 
@@ -134,5 +195,22 @@
     .avatar-input:hover .avatar-input-hint,
     .avatar-input:focus .avatar-input-hint{
         visibility: visible;
+    }
+
+    .helper-text.invalid{
+        color: rgba(243,33,89,.8);
+    }
+
+    .input.invalid{
+        border: 1px solid rgba(243,33,89,.5);
+    }
+
+    .input.invalid:focus{
+        box-shadow: 0 0 2px 1px rgba(243,33,89,.5);
+        border: 1px solid rgba(243,33,89,.1);
+    }
+
+    .input:focus{
+        box-shadow: 0 0 1px 2px rgba(108,113,248,.5);
     }
 </style>
