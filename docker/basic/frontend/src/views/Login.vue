@@ -17,6 +17,10 @@
                         class="helper-text invalid"
                         v-else-if="$v.email.$dirty && !$v.email.email"
                 >Введите корректный электронный адрес</small>
+                <small
+                        class="helper-text invalid"
+                        v-else-if="this.result=='userNotCreated'"
+                >Пользователь не найден</small>
             </div>
             <div class="form-group">
                 <input id="password"
@@ -29,6 +33,9 @@
                         class="helper-text invalid"
                         v-if="$v.password.$dirty && !$v.password.required"
                 >Введите пароль</small>
+                <small class="helper-text invalid"
+                        v-else-if="this.result=='passwordIncorrect'"
+                >Неверный пароль</small>
             </div>
             <div class="form-group">
                 <input type="submit" class="form-control input submit login" value="Войти">
@@ -48,23 +55,68 @@
 
 <script>
     import {email, required} from 'vuelidate/lib/validators'
+    import HTTP from "../components/http";
+
     export default {
         name: "Login",
         data: () => ({
             email: '',
             password: '',
+            accessToken: '',
+            result: '',
+            error:''
         }),
         validations: {
             email: {email, required},
             password : {required}
         },
+        created(){
+            this.accessToken = this.getCookie('accessToken');
+            this.sendLogin();
+        },
         methods:{
+            getCookie(name){
+                var results = document.cookie.match ( '(^|;) ?' + name + '=([^;]*)(;|$)' );
+                if ( results )
+                    return ( unescape ( results[2] ) );
+                else
+                    return null;
+            },
+            saveToken(token){
+                this.accessToken = token;
+                document.cookie = "accessToken="+this.accessToken;
+            },
+            sendLogin(){
+                HTTP.post('/user/login', {
+                    email: this.email,
+                    password: this.password,
+                    accessToken: this.accessToken
+                }).then(
+                    (response) => {
+                        if(response.data.status == "tokenExists"){
+                            this.saveToken(response.data.accessToken);
+                            this.$router.push('/');
+                        }
+                        this.result = response.data.status;
+                        if(this.result == 'success'){
+                            this.saveToken(response.data.accessToken);
+                            this.$router.push('/');
+                        }
+
+                    },
+                    (error) =>{
+                        this.result = error.response.data;
+                        console.log(error.response.data.result);
+                    }
+                )
+            },
             submitHandler(){
                 if(this.$v.$invalid){
                     this.$v.$touch();
                     return;
+                }else{
+                    this.sendLogin();
                 }
-                this.$router.push('/');
             }
         }
     }

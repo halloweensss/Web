@@ -53,4 +53,8 @@ class InstagramAccount extends \yii\db\ActiveRecord
     {
         return $this->hasMany(InstagramFollow::className(), ['instagramId' => 'id']);
     }
+
+    public static function getInstagramAccountById($id){
+        return static::findOne($id);
+    }
 }

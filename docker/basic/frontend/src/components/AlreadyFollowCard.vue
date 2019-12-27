@@ -6,7 +6,7 @@
             <a class="follow-nickname" :href="alreadyFollowUser.profileUrl">
                 {{alreadyFollowUser.username}}
             </a>
-            <UnfollowButton v-bind:follow-user="alreadyFollowUser"/>
+            <UnfollowButton v-if="alreadyFollowUser.username.length > 0" v-bind:follow-user="alreadyFollowUser"/>
         </div>
     </div>
 </template>

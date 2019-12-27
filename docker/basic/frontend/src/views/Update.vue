@@ -35,11 +35,11 @@
                 <input id="password"
                        type="password"
                        v-model.trim="password"
-                       :class="{invalid: ($v.password.$dirty && !$v.password.required) || ($v.password.$dirty && !$v.password.minLength)}"
+                       :class="{invalid: this.password.length > 0 && ($v.password.$dirty && !$v.password.minLength)}"
                        class="form-control input"
-                       placeholder="Пароль">
+                       placeholder="Новый пароль">
                 <small class="helper-text invalid"
-                       v-if="($v.password.$dirty && !$v.password.minLength) ||($v.password.$dirty && !$v.password.required)">
+                       v-if="(this.password.length > 0 && ( !$v.password.minLength))">
                     Пароль должен быть не менее {{this.minLengthPassword}} символов
                 </small>
             </div>
@@ -47,13 +47,14 @@
                 <input type="submit" class="form-control input submit" value="Сохранить">
             </div>
             <router-link to="/">
-                <a href="index.html">Отмена</a>
+                <a href="index.html">Назад</a>
             </router-link>
         </form>
     </div>
 </template>
 
 <script>
+    import HTTP from "../components/http";
     import {required, minLength, maxLength} from "vuelidate/lib/validators"
     export default {
         name: "Update",
@@ -68,16 +69,61 @@
             };
         },
         validations: {
-            password : {required, minLength: minLength(6)},
+            password : {minLength: minLength(6)},
             login: {required, maxLength:maxLength(20)}
         },
+        created(){
+            this.getProfileInfo();
+        },
         methods:{
+            updateInformationProfile(){
+                HTTP.post('/user/update', {
+                    accessToken: this.getCookie('accessToken'),
+                    password: this.password.length > 0 ? this.password: null,
+                    login: this.login
+                }).then(
+                    (response) => {
+                        this.result = response.data.status;
+                        if(this.result == 'success'){
+                            this.$router.push('/update');
+                        }
+                    },
+                    (error) =>{
+                        this.result = error.response.data;
+                    }
+                )
+            },
+            getCookie(name){
+                var results = document.cookie.match ( '(^|;) ?' + name + '=([^;]*)(;|$)' );
+                if ( results )
+                    return ( unescape ( results[2] ) );
+                else
+                    return null;
+            },
+            getProfileInfo(){
+                HTTP.post('/user/get-profile', {
+                    accessToken: this.getCookie('accessToken')
+                }).then(
+                    (response) => {
+                        this.result = response.data.status;
+                        if(this.result == 'success'){
+                            this.login = response.data.user.username;
+                            this.imageSrc = response.data.user.avatarUrl;
+                        }
+                    },
+                    (error) =>{
+                        this.result = error.response.data;
+                        console.log(error.response.data.result);
+                    }
+                )
+            },
             submitHandler(){
+                console.log(this.password.length);
                 if(this.$v.$invalid){
                     this.$v.$touch();
                     return;
                 }
-                this.$router.push('/update');
+                this.updateInformationProfile();
             },
             onFileChange(event){
                 const file = event.target.files[0];

@@ -33,6 +33,10 @@
                        v-else-if="$v.email.$dirty && !$v.email.email">
                     Введите корректный электронный адрес
                 </small>
+                <small class="helper-text invalid"
+                       v-else-if="this.result == 'userExists'">
+                    Пользователь с таким адресом уже существует
+                </small>
             </div>
             <div class="form-group">
                 <input id="password"
@@ -59,6 +63,7 @@
 
 <script>
     import {email, required, minLength, maxLength} from "vuelidate/lib/validators"
+    import HTTP from "../components/http";
 
     export default {
         name: "Register",
@@ -68,7 +73,8 @@
                 email: '',
                 password: '',
                 minLengthPassword: 6,
-                maxLengthLogin: 20
+                maxLengthLogin: 20,
+                result:''
             };
         },
         validations: {
@@ -77,12 +83,44 @@
             login: {required, maxLength:maxLength(20)}
         },
         methods:{
+            getCookie(name){
+                var results = document.cookie.match ( '(^|;) ?' + name + '=([^;]*)(;|$)' );
+                if ( results )
+                    return ( unescape ( results[2] ) );
+                else
+                    return null;
+            },
+            saveToken(token){
+                document.cookie = "accessToken="+token;
+            },
+            registerNewAccount(){
+                HTTP.post('/user/add', {
+                    login: this.login,
+                    email: this.email,
+                    password: this.password,
+                    accessToken: null,
+                    authKey: null,
+                    image: null
+                }).then(
+                    (response) => {
+                        this.result = response.data.status;
+                        if(this.result == 'userCreated'){
+                            this.saveToken(response.data.accessToken);
+                            this.$router.push('/login');
+                        }
+                    },
+                    (error) =>{
+                        this.result = error.response.data;
+                        console.log(error.response.data.result);
+                    }
+                )
+            },
             submitHandler(){
                 if(this.$v.$invalid){
                     this.$v.$touch();
                     return;
                 }
-                this.$router.push('/');
+                this.registerNewAccount();
             }
         }
     }

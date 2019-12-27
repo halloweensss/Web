@@ -1,11 +1,12 @@
 <template>
     <div class="margin-button">
-        <button class="btn btn-danger follow-button" type="button">Отписаться</button>
-        <button class="btn btn-danger follow-button min" type="button"><i class="fa fa-times" aria-hidden="true"></i></button>
+        <button class="btn btn-danger follow-button" type="button" @click="acceptUnfollow">Отписаться</button>
+        <button class="btn btn-danger follow-button min" type="button" @click="acceptUnfollow"><i class="fa fa-times" aria-hidden="true"></i></button>
     </div>
 </template>
 
 <script>
+    import HTTP from "../components/http";
     export default {
         name: "UnfollowButton",
         props:{
@@ -13,6 +14,31 @@
                 type: Object,
                 required: true
             }
+        },
+        methods: {
+            getCookie(name){
+                var results = document.cookie.match ( '(^|;) ?' + name + '=([^;]*)(;|$)' );
+                if ( results )
+                    return ( unescape ( results[2] ) );
+                else
+                    return null;
+            },
+            acceptUnfollow() {
+                HTTP.post('/user/unfollow', {
+                    accessToken: this.getCookie('accessToken'),
+                    id: this.followUser.id,
+                    serviceName: this.followUser.serviceName
+                }).then(
+                    (response) => {
+                        if (response.data.status == 'success') {
+                            this.$router.update();
+                        }
+                    },
+                    (error) => {
+                        this.result = error.response.data;
+                    }
+                )
+            },
         }
     }
 </script>

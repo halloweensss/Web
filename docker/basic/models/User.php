@@ -40,7 +40,7 @@ class User extends BaseModel
             [['createdAt', 'updateAt'], 'safe'],
             [['avatarImage'], 'string'],
             [['login'], 'string', 'max' => 20],
-            [['email', 'password'], 'string', 'max' => 30],
+            [['email', 'password'], 'string', 'max' => 60],
             [['accessToken', 'authKey'], 'string', 'max' => 128],
         ];
     }
@@ -66,17 +66,13 @@ class User extends BaseModel
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getInstagramFollows()
-    {
-        return $this->hasMany(InstagramFollow::className(), ['userId' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getTelegramFollows()
     {
         return $this->hasMany(TelegramFollow::className(), ['userId' => 'id']);
+    }
+
+    public function getInstagramFollowById($id){
+        return $this->hasMany(InstagramFollow::className(), ['userId' => 'id'])->where(['=','instagramId', $id])->all();
     }
 
     public function validateAuthKey($authKey)
@@ -87,6 +83,11 @@ class User extends BaseModel
     public function updateToken()
     {
         $this->accessToken = Yii::$app->security->generateRandomString();
+    }
+
+    public function setPassword($password){
+        $this->password = $password;
+       $this->password = Yii::$app->security->generatePasswordHash($this->password);
     }
 
     public function validatePassword($password)

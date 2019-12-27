@@ -17,7 +17,7 @@ $config = [
             'cookieValidationKey' => '0l_6MR4AdxzCxjYcHQMFawTxYjqmzDQN',
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
-            ],
+            ]
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -52,6 +52,7 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
+                'POST api/<controller>/login' => 'api/<controller>/login',
             ],
         ],
 

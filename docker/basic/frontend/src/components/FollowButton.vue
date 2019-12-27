@@ -1,18 +1,45 @@
 <template>
     <div class="margin-button">
-        <button class="btn btn-primary follow-button" type="button">Подписаться</button>
-        <button class="btn btn-primary follow-button min" type="button"><i class="fas fa-check"></i></button>
+        <button class="btn btn-primary follow-button" type="button"  @click="acceptFollow">Подписаться</button>
+        <button class="btn btn-primary follow-button min" type="button"  @click="acceptFollow"><i class="fas fa-check"></i></button>
     </div>
 </template>
 
 <script>
+    import HTTP from "../components/http";
     export default {
         name: "FollowButton",
-        props:{
-            followUser:{
+        props: {
+            followUser: {
                 type: Object,
                 required: true
             }
+        }, methods: {
+            getCookie(name){
+                var results = document.cookie.match ( '(^|;) ?' + name + '=([^;]*)(;|$)' );
+                if ( results )
+                    return ( unescape ( results[2] ) );
+                else
+                    return null;
+            },
+            acceptFollow() {
+                HTTP.post('/user/follow', {
+                    accessToken: this.getCookie('accessToken'),
+                    id: this.followUser.id,
+                    username: this.followUser.username,
+                    serviceName: this.followUser.serviceName,
+                    profileUrl: this.followUser.profileUrl
+                }).then(
+                    (response) => {
+                        if (response.data.status == 'success') {
+                            this.$router.update();
+                        }
+                    },
+                    (error) => {
+                        this.result = error.response.data;
+                    }
+                )
+            },
         }
     }
 </script>

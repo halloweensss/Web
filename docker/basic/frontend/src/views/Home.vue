@@ -21,7 +21,7 @@
       </div>
       <div class="dropdown dropdown-header">
         <button class="d-flex btn dropdown-header shadow-none" type="button" id="dropdownUserInfo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <a class="name-profile" id="userName">Halloweens</a>
+          <a class="name-profile" id="userName">{{this.userInformation.username}}</a>
           <img class="rounded-circle icon-profile" src="img/sand.jpg">
         </button>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownUserInfo">
@@ -29,7 +29,7 @@
             <a class="dropdown-item">Настройки</a>
           </router-link>
           <router-link to="/login">
-            <a class="dropdown-item" href="login.html">Выйти</a>
+            <a class="dropdown-item" @click="exit" >Выйти</a>
           </router-link>
         </div>
       </div>
@@ -46,19 +46,19 @@
       <div class="tab-pane fade show" id="pills-follow" role="tabpanel" aria-labelledby="pills-follow-tab">
         <div class="container">
           <div class="col-12 d-flex flex-wrap p-0">
-            <input class="form-control search-input" type="search" placeholder="Поиск" id="SuggestionInput" aria-label="Search" @focusin="displayShow" @focusout="displayNone">
+            <input class="form-control search-input" type="search" v-model.trim="searchNickname" placeholder="Поиск" id="SuggestionInput" aria-label="Search" @keydown="findFollows" @focusin="displayShow" @change="findFollows">
           </div>
         </div>
         <div class="container">
           <div class="col-12">
-            <div v-bind:style="{ display: this.display}" class="suggestion-container-items">
+            <div v-bind:style="{ display: this.display}" @click="displayNone" class="suggestion-container-items">
               <FollowCard v-for="(followUser, index) in followUsers" :key="followUser.serviceName + index" v-bind:follow-user="followUser"/>
             </div>
           </div>
         </div>
         <div class="container follow-container">
           <div class="col-12 d-flex flex-wrap align-items-center justify-content-center p-0">
-            <div class="follow-container-items">
+            <div v-if="Object.keys(this.alreadyFollowUsers).length > 0" class="follow-container-items">
               <AlreadyFollowCard v-for="(alreadyFollowUser, index) in alreadyFollowUsers" :key="alreadyFollowUser.serviceName + index" v-bind:already-follow-user="alreadyFollowUser"/>
             </div>
           </div>
@@ -78,263 +78,100 @@
     data(){
       return{
         display: "none",
+        searchNickname:'',
+        userInformation:{
+          avatarUrl:'',
+          username:''
+        },
         usersInfo:[
-          {
-            id:1,
-            username:"HalloWeen1",
-            login:"@halloween",
-            serviceName: "telegram",
-            accountUrl:"https://www.instagram.com/hideo_kojima/",
-            avatarUrl:"https://www.1zoom.me/big2/49/179561-melisenta.jpg",
-            imageUrl:["https://www.nastol.com.ua/pic/201502/1024x768/nastol.com.ua-130464.jpg","https://www.nastol.com.ua/pic/201502/1024x768/nastol.com.ua-130464.jpg"],
-            postUrl:"https://www.instagram.com/p/B6U0cUUH7YM/",
-            postText:"Привет!",
-            postLikes:"9.8K",
-            postComments:"142",
-            postViews:"13",
-            postDate:"12.12.2012 22:48"
-          },
-          {
-            id:2,
-            username:"HalloWeen",
-            login:"@halloween",
-            serviceName: "instagram",
-            accountUrl:"https://www.instagram.com/hideo_kojima/",
-            avatarUrl:"https://www.1zoom.me/big2/49/179561-melisenta.jpg",
-            imageUrl:["https://img1.akspic.ru/image/39574-most-stolica-orientir-gorod-gorodskoj_rajon-1680x1050.jpg"],
-            postUrl:"https://www.instagram.com/p/B6U0cUUH7YM/",
-            postText:"Ку-ку!",
-            postLikes:"1K",
-            postComments:"3213",
-            postViews:"13",
-            postDate:"12.12.2012 22:48"
-          },
-          {
-            id:2,
-            username:"HalloWeen",
-            login:"@halloween",
-            serviceName: "instagram",
-            accountUrl:"https://www.instagram.com/hideo_kojima/",
-            avatarUrl:"https://www.1zoom.me/big2/49/179561-melisenta.jpg",
-            imageUrl:["https://www.nastol.com.ua/pic/201411/1920x1200/nastol.com.ua-118538.jpg"],
-            postUrl:"https://www.instagram.com/p/B6U0cUUH7YM/",
-            postText:"Ку-ку!",
-            postLikes:"1K",
-            postComments:"3213",
-            postViews:"13",
-            postDate:"12.12.2012 22:48"
-          },
-          {
-            id:3,
-            username:"HalloWeen",
-            login:"@halloween",
-            serviceName: "instagram",
-            accountUrl:"https://www.instagram.com/hideo_kojima/",
-            avatarUrl:"https://www.1zoom.me/big2/49/179561-melisenta.jpg",
-            imageUrl:["https://www.nastol.com.ua/pic/201502/1024x768/nastol.com.ua-130464.jpg","https://i.pinimg.com/736x/71/d0/a5/71d0a525479089b7a5bc9e1a554a18f7.jpg"],
-            postUrl:"https://www.instagram.com/p/B6U0cUUH7YM/",
-            postText:"Светочка!",
-            postLikes:"9.8K",
-            postComments:"142",
-            postViews:"13",
-            postDate:"12.12.2012 22:48"
-          },
-          {
-            id:4,
-            username:"HalloWeen",
-            login:"@halloween",
-            serviceName: "instagram",
-            accountUrl:"https://www.instagram.com/hideo_kojima/",
-            avatarUrl:"https://www.1zoom.me/big2/49/179561-melisenta.jpg",
-            imageUrl:["http://wallpaperswide.com/download/white_mountains_peaks_lake_reflection_nature-wallpaper-1440x2560.jpg","https://i.pinimg.com/736x/71/d0/a5/71d0a525479089b7a5bc9e1a554a18f7.jpg"],
-            postUrl:"https://www.instagram.com/p/B6U0cUUH7YM/",
-            postText:"Светочка!",
-            postLikes:"9.8K",
-            postComments:"142",
-            postViews:"13",
-            postDate:"12.12.2012 22:48"
-          },
-          {
-            id:5,
-            username:"HalloWeen",
-            login:"@halloween",
-            serviceName: "instagram",
-            accountUrl:"https://www.instagram.com/hideo_kojima/",
-            avatarUrl:"https://www.1zoom.me/big2/49/179561-melisenta.jpg",
-            imageUrl:["https://www.nastol.com.ua/pic/201502/1024x768/nastol.com.ua-130464.jpg"],
-            postUrl:"https://www.instagram.com/p/B6U0cUUH7YM/",
-            postText:"Светочка!",
-            postLikes:"9.8K",
-            postComments:"142",
-            postViews:"13",
-            postDate:"12.12.2012 22:48"
-          },
-          {
-            id:6,
-            username:"HalloWeen",
-            login:"@halloween",
-            serviceName: "instagram",
-            accountUrl:"https://www.instagram.com/hideo_kojima/",
-            avatarUrl:"https://www.1zoom.me/big2/49/179561-melisenta.jpg",
-            imageUrl:["https://www.nastol.com.ua/pic/201502/1024x768/nastol.com.ua-130464.jpg"],
-            postUrl:"https://www.instagram.com/p/B6U0cUUH7YM/",
-            postText:"Светочка!",
-            postLikes:"9.8K",
-            postComments:"142",
-            postViews:"13",
-            postDate:"12.12.2012 22:48"
-          },
-          {
-            id:7,
-            username:"HalloWeen",
-            login:"@halloween",
-            serviceName: "instagram",
-            accountUrl:"https://www.instagram.com/hideo_kojima/",
-            avatarUrl:"https://www.1zoom.me/big2/49/179561-melisenta.jpg",
-            imageUrl:["https://www.nastol.com.ua/pic/201502/1024x768/nastol.com.ua-130464.jpg","https://i.pinimg.com/736x/71/d0/a5/71d0a525479089b7a5bc9e1a554a18f7.jpg"],
-            postUrl:"https://www.instagram.com/p/B6U0cUUH7YM/",
-            postText:"Светочка!",
-            postLikes:"9.8K",
-            postComments:"142",
-            postViews:"13",
-            postDate:"12.12.2012 22:48"
-          },
-          {
-            id:8,
-            username:"HalloWeen",
-            login:"@halloween",
-            serviceName: "instagram",
-            accountUrl:"https://www.instagram.com/hideo_kojima/",
-            avatarUrl:"https://www.1zoom.me/big2/49/179561-melisenta.jpg",
-            imageUrl:["https://www.nastol.com.ua/pic/201502/1024x768/nastol.com.ua-130464.jpg"],
-            postUrl:"https://www.instagram.com/p/B6U0cUUH7YM/",
-            postText:"Светочка!",
-            postLikes:"9.8K",
-            postComments:"142",
-            postViews:"13",
-            postDate:"12.12.2012 22:48"
-          }
         ],
         followUsers: [
-          {
-            id:1,
-            username:"HalloWeen",
-            serviceName:"instagram",
-            follow:true,
-            profileUrl:"https://www.instagram.com/hideo_kojima/"
-          },
-          {
-            id:1,
-            username:"HalloWeen",
-            serviceName:"telegram",
-            follow:true,
-            profileUrl:"https://www.instagram.com/hideo_kojima/"
-          },
-          {
-            id:2,
-            username:"HalloWeen",
-            serviceName:"instagram",
-            follow:false,
-            profileUrl:"https://www.instagram.com/hideo_kojima/"
-          },
-          {
-            id:3,
-            username:"HalloWeen",
-            serviceName:"telegram",
-            follow:false,
-            profileUrl:"https://www.instagram.com/hideo_kojima/"
-          }
         ],
         alreadyFollowUsers: [
-          {
-            id:1,
-            username:"4124125125125125151",
-            serviceName:"instagram",
-            follow:true,
-            profileUrl:"https://www.instagram.com/hideo_kojima/"
-          },
-          {
-            id:1,
-            username:"412412512512512515141241251251251251514124125125125125151",
-            serviceName:"telegram",
-            follow:true,
-            profileUrl:"https://www.instagram.com/hideo_kojima/"
-          },
-          {
-            id:2,
-            username:"312jnjnvjrenvnjenvjrnjvnrjn",
-            serviceName:"instagram",
-            follow:true,
-            profileUrl:"https://www.instagram.com/hideo_kojima/"
-          },
-          {
-            id:3,
-            username:"uh3runf4n43nnucn48cn4nc8nc48un",
-            serviceName:"telegram",
-            follow:true,
-            profileUrl:"https://www.instagram.com/hideo_kojima/"
-          },
-          {
-            id:4,
-            username:"uh3runf4n43nnucn48cn4nc8nc48un",
-            serviceName:"telegram",
-            follow:true,
-            profileUrl:"https://www.instagram.com/hideo_kojima/"
-          },
-          {
-            id:5,
-            username:"uh3runf4n43nnucn48cn4nc8nc48un",
-            serviceName:"telegram",
-            follow:true,
-            profileUrl:"https://www.instagram.com/hideo_kojima/"
-          },
-          {
-            id:6,
-            username:"uh3runf4n43nnucn48cn4nc8nc48un",
-            serviceName:"telegram",
-            follow:true,
-            profileUrl:"https://www.instagram.com/hideo_kojima/"
-          },
-          {
-            id:7,
-            username:"uh3runf4n43nnucn48cn4nc8nc48un",
-            serviceName:"telegram",
-            follow:true,
-            profileUrl:"https://www.instagram.com/hideo_kojima/"
-          },
-          {
-            id:8,
-            username:"uh3runf4n43nnucn48cn4nc8nc48un",
-            serviceName:"telegram",
-            follow:true,
-            profileUrl:"https://www.instagram.com/hideo_kojima/"
-          },
-          {
-            id:9,
-            username:"uh3runf4n43nnucn48cn4nc8nc48un",
-            serviceName:"telegram",
-            follow:true,
-            profileUrl:"https://www.instagram.com/hideo_kojima/"
-          },
-          {
-            id:10,
-            username:"uh3runf4n43nnucn48cn4nc8nc48un",
-            serviceName:"telegram",
-            follow:true,
-            profileUrl:"https://www.instagram.com/hideo_kojima/"
-          }
         ]
       }
     },
-    computed: {
-      computedDisplay: function () {
-        return this.width;
-      }
-    },
     created(){
-      HTTP.post('/post/get').then(response => (this.usersInfo = response.data));
+      this.getProfileInfo();
+      this.getPosts();
+      this.getFollows();
     },
     methods:{
+      findFollows(){
+        HTTP.post('/user/get-followers-not-exist', {
+          accessToken: this.getCookie('accessToken'),
+          name: this.searchNickname
+        }).then(
+                (response) => {
+                  if(response.data == null) {
+                    this.followUsers = null;
+                  }
+                  else {
+                    this.followUsers = response.data;
+                  }
+                },
+                (error) =>{
+                  this.result = error.response.data;
+                }
+        )
+      },
+      getCookie(name){
+        var results = document.cookie.match ( '(^|;) ?' + name + '=([^;]*)(;|$)' );
+        if ( results )
+          return ( unescape ( results[2] ) );
+        else
+          return null;
+      },
+      exit(){
+        document.cookie = "accessToken=";
+        this.$router.push('/login');
+      },
+      getFollows(){
+        HTTP.post('/user/get-followers-exist', {
+          accessToken: this.getCookie('accessToken')
+        }).then(
+                (response) => {
+                  if(response.data == null) {
+                    this.alreadyFollowUsers = null;
+                  }
+                  else {
+                    this.alreadyFollowUsers = response.data;
+                  }
+                },
+                (error) =>{
+                  this.result = error.response.data;
+                }
+        )
+      },
+      getProfileInfo(){
+        HTTP.post('/user/get-profile', {
+          accessToken: this.getCookie('accessToken')
+        }).then(
+                (response) => {
+                  this.result = response.data.status;
+                  if(this.result == 'success'){
+                    this.userInformation.username = response.data.user.username;
+                    this.userInformation.avatarUrl = response.data.user.avatarUrl;
+                  }
+
+                },
+                (error) =>{
+                  this.result = error.response.data;
+                }
+        )
+      },
+      getPosts() {
+        HTTP.post('/post/get', {
+          accessToken: this.getCookie('accessToken')
+        }).then(
+                (response) => {
+                  this.usersInfo = response.data;
+                },
+                (error) => {
+                  this.result = error.response.data;
+                }
+        )
+      },
       displayNone: function () {
         this.display='none';
       },
@@ -343,7 +180,6 @@
       }
     },
     mounted() {
-      console.log(123);
       if (typeof this.$redrawVueMasonry === 'function') {
         this.$redrawVueMasonry()
       }
