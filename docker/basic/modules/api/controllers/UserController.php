@@ -2,8 +2,10 @@
 namespace app\modules\api\controllers;
 
 
+use app\components\ImageHelper;
 use app\models\User;
 use yii\rest\Controller;
+use yii\web\UploadedFile;
 
 class UserController extends BaseController
 {
@@ -105,7 +107,7 @@ class UserController extends BaseController
         }
         $user->login = $data['login'];
         $user->password = $data['password'];
-        //Добавить обновление аватарки
+        //TODO: добавить аватарку
         if(!$user->save())
             return ['status' => 'failed'];
         return ['status' => 'success'];

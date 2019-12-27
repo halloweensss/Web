@@ -72,6 +72,7 @@
   import Post from "../components/Post";
   import FollowCard from "../components/FollowCard";
   import AlreadyFollowCard from "../components/AlreadyFollowCard";
+  import HTTP from "../components/http";
   export default {
     components: {AlreadyFollowCard, FollowCard, Post},
     data(){
@@ -329,6 +330,9 @@
       computedDisplay: function () {
         return this.width;
       }
+    },
+    created(){
+      HTTP.post('/post/get').then(response => (this.usersInfo = response.data));
     },
     methods:{
       displayNone: function () {
