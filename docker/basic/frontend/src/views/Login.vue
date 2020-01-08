@@ -1,4 +1,6 @@
 <template>
+    <div>
+        <vue-headful title="Вход"/>
     <div class="login-container d-flex align-items-center justify-content-center">
         <form class="login-form" method="send" @submit.prevent="submitHandler">
             <img class="icon-header" src="../assets/img/icon.svg">
@@ -6,50 +8,54 @@
                 <input id="email"
                        type="text"
                        v-model.trim="email"
-                       :class="{invalid: ($v.email.$dirty && !$v.email.required) || ($v.email.$dirty && !$v.email.email)}"
+                       :class="{invalid: ($v.email.$dirty && !$v.email.required) || ($v.email.$dirty && !$v.email.email) || this.result ==='userNotCreated'}"
                        class="form-control input"
                        placeholder="Электронный адрес">
-                <small
+                <small id = "emailEmpty"
                         class="helper-text invalid"
                         v-if="$v.email.$dirty && !$v.email.required"
                 >Поле не должно быть пустым</small>
-                <small
+                <small id = "emailIncorrect"
                         class="helper-text invalid"
                         v-else-if="$v.email.$dirty && !$v.email.email"
                 >Введите корректный электронный адрес</small>
-                <small
+                <small id = "userNotFound"
                         class="helper-text invalid"
-                        v-else-if="this.result=='userNotCreated'"
+                        v-else-if="this.result ==='userNotCreated'"
                 >Пользователь не найден</small>
             </div>
             <div class="form-group">
                 <input id="password"
                        type="password"
                        v-model.trim="password"
-                       :class="{invalid: ($v.password.$dirty && !$v.password.required)}"
+                       :class="{invalid: ($v.password.$dirty && !$v.password.required) || this.result ==='passwordIncorrect'}"
                        class="form-control input"
                        placeholder="Пароль">
                 <small
+                        id = "passwordEmpty"
                         class="helper-text invalid"
                         v-if="$v.password.$dirty && !$v.password.required"
                 >Введите пароль</small>
-                <small class="helper-text invalid"
-                        v-else-if="this.result=='passwordIncorrect'"
+                <small
+                        id = "passwordIncorrect"
+                        class="helper-text invalid"
+                        v-else-if="this.result ==='passwordIncorrect'"
                 >Неверный пароль</small>
             </div>
             <div class="form-group">
-                <input type="submit" class="form-control input submit login" value="Войти">
+                <input id = "submit" type="submit" class="form-control input submit login" value="Войти">
             </div>
             <div class="strike">
                 <span> или </span>
             </div>
-            <router-link to="/register">
-                <a class="form-control input submit create-account-btn">Создать аккаунт</a>
+            <router-link to="/register" :style="{opacity: .9}">
+                <a id = "toRegister" class="form-control input submit create-account-btn">Создать аккаунт</a>
             </router-link>
             <router-link to="/restore">
-                <a class="forgot-pass">Забыли пароль?</a>
+                <a id = "toRestore" class="forgot-pass">Забыли пароль?</a>
             </router-link>
         </form>
+    </div>
     </div>
 </template>
 
@@ -72,7 +78,7 @@
         },
         created(){
             this.accessToken = this.getCookie('accessToken');
-            this.sendLogin();
+            this.getProfileInfoOpen();
         },
         methods:{
             getCookie(name){
@@ -86,6 +92,19 @@
                 this.accessToken = token;
                 document.cookie = "accessToken="+this.accessToken;
             },
+            getProfileInfoOpen() {
+                HTTP.post('/user/get-profile', {
+                    accessToken: this.getCookie('accessToken')
+                }).then(
+                    (response) => {
+                        this.result = response.data.status;
+                        console.log(this.result);
+                        if(this.result === "success"){
+                            this.$router.push('/');
+                        }
+                    }
+                )
+            },
             sendLogin(){
                 HTTP.post('/user/login', {
                     email: this.email,
@@ -93,12 +112,12 @@
                     accessToken: this.accessToken
                 }).then(
                     (response) => {
-                        if(response.data.status == "tokenExists"){
+                        if(response.data.status === "tokenExists"){
                             this.saveToken(response.data.accessToken);
                             this.$router.push('/');
                         }
                         this.result = response.data.status;
-                        if(this.result == 'success'){
+                        if(this.result === 'success'){
                             this.saveToken(response.data.accessToken);
                             this.$router.push('/');
                         }
@@ -187,6 +206,7 @@
 
     .create-account-btn{
         width: 50%;
+        opacity: .9;
         display: block;
         margin: auto;
     }

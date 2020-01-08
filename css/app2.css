@@ -153,3 +153,33 @@ a:focus{
     height: 100px;
     opacity: 0;
 }
+
+.radio-button{
+    background-color: #6C71F8;
+    color: #FFFFFF;
+    border: none;
+}
+
+.radio-button:hover,
+.radio-button:focus{
+    background-color: #6C51B9;
+    color: #FFFFFF;
+    border: none;
+}
+
+.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle{
+    background-color: #2ADE3F;
+    border: none;
+}
+
+.btn-group{
+    display: flex;
+}
+
+.custom-select{
+    display: flex;
+    font-size: 15px;
+    border-radius: 5px;
+    border: none;
+    opacity: 1;
+}

@@ -1,5 +1,6 @@
 <template>
   <div>
+      <vue-headful title="Главная"/>
   <header>
     <nav class="navbar fixed-top navbar-light bg-white">
       <a class="navbar-brand" href="#">
@@ -22,14 +23,14 @@
       <div class="dropdown dropdown-header">
         <button class="d-flex btn dropdown-header shadow-none" type="button" id="dropdownUserInfo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <a class="name-profile" id="userName">{{this.userInformation.username}}</a>
-          <img class="rounded-circle icon-profile" src="img/sand.jpg">
+          <img class="rounded-circle icon-profile avatar-input" :style="{'background-image': 'url('+this.userInformation.avatarUrl+')'}">
         </button>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownUserInfo">
           <router-link to="/update">
-            <a class="dropdown-item">Настройки</a>
+            <a id="settings" class="dropdown-item" href="">Настройки</a>
           </router-link>
           <router-link to="/login">
-            <a class="dropdown-item" @click="exit" >Выйти</a>
+            <a id="exit" class="dropdown-item" @click="exit" href="">Выйти</a>
           </router-link>
         </div>
       </div>
@@ -39,27 +40,37 @@
   <main>
     <div class="tab-content" id="pills-tabContent">
       <div class="tab-pane fade show active" id="pills-news" role="tabpanel" aria-labelledby="pills-news-tab">
+        <template v-if="Object.keys(this.usersInfo).length > 0">
         <div v-masonry="" id="masonry-container" class="container">
           <Post v-for="(userInfo, index) in usersInfo" :key="'post' + index" v-bind:user-info="userInfo"/>
         </div>
+        </template>
+        <template v-else-if="(this.usersInfo).length == 0 && this.alreadyFollowUsers['status'] !== 'null'">
+            <PostLoader></PostLoader>
+        </template>
+        <template v-else-if="this.alreadyFollowUsers['status'] === 'null'">
+          <div class="text-follow-none">Список Ваших подписок пуст</div>
+        </template>
       </div>
       <div class="tab-pane fade show" id="pills-follow" role="tabpanel" aria-labelledby="pills-follow-tab">
         <div class="container">
           <div class="col-12 d-flex flex-wrap p-0">
-            <input class="form-control search-input" type="search" v-model.trim="searchNickname" placeholder="Поиск" id="SuggestionInput" aria-label="Search" @keydown="findFollows" @focusin="displayShow" @change="findFollows">
+            <input class="form-control search-input" type="search" v-model.trim="searchNickname" placeholder="Поиск" id="SuggestionInput" aria-label="Search" @focusin="displayShow" @change="findFollows" @focusout="displayNone">
           </div>
         </div>
         <div class="container">
           <div class="col-12">
             <div v-bind:style="{ display: this.display}" @click="displayNone" class="suggestion-container-items">
-              <FollowCard v-for="(followUser, index) in followUsers" :key="followUser.serviceName + index" v-bind:follow-user="followUser"/>
+              <FollowCard v-for="(followUser, index) in followUsers" :key="followUser.serviceName + index" v-bind:follow-user="followUser" v-on:follow-update="followUpdate" v-on:unfollow-update="followUpdate"/>
             </div>
           </div>
         </div>
         <div class="container follow-container">
           <div class="col-12 d-flex flex-wrap align-items-center justify-content-center p-0">
-            <div v-if="Object.keys(this.alreadyFollowUsers).length > 0" class="follow-container-items">
-              <AlreadyFollowCard v-for="(alreadyFollowUser, index) in alreadyFollowUsers" :key="alreadyFollowUser.serviceName + index" v-bind:already-follow-user="alreadyFollowUser"/>
+            <div class="follow-container-items">
+              <template v-if = "alreadyFollowUsers.length > 0">
+              <AlreadyFollowCard v-for="(alreadyFollowUser, index) in alreadyFollowUsers" :key="alreadyFollowUser.serviceName + index" v-bind:already-follow-user="alreadyFollowUser" v-on:follow-update="followUpdate" v-on:unfollow-update="followUpdate"/>
+              </template>
             </div>
           </div>
         </div>
@@ -72,15 +83,16 @@
   import Post from "../components/Post";
   import FollowCard from "../components/FollowCard";
   import AlreadyFollowCard from "../components/AlreadyFollowCard";
-  import HTTP from "../components/http";
+  import PostLoader from "../components/PostLoader";
+  import HTTP, {HTTPData} from "../components/http";
   export default {
-    components: {AlreadyFollowCard, FollowCard, Post},
+    components: {PostLoader, AlreadyFollowCard, FollowCard, Post},
     data(){
       return{
         display: "none",
         searchNickname:'',
         userInformation:{
-          avatarUrl:'',
+          avatarUrl:'/img/sand.1136b49a.jpg',
           username:''
         },
         usersInfo:[
@@ -97,6 +109,12 @@
       this.getFollows();
     },
     methods:{
+      followUpdate(){
+        this.getFollows();
+        this.getPosts();
+        this.findFollows();
+        this.updateGrid();
+      },
       findFollows(){
         HTTP.post('/user/get-followers-not-exist', {
           accessToken: this.getCookie('accessToken'),
@@ -144,21 +162,32 @@
         )
       },
       getProfileInfo(){
-        HTTP.post('/user/get-profile', {
-          accessToken: this.getCookie('accessToken')
-        }).then(
+        const data = new FormData();
+        data.append('accessToken', this.getCookie('accessToken'));
+        HTTPData.post('/user/get-profile', data).then(
                 (response) => {
                   this.result = response.data.status;
                   if(this.result == 'success'){
                     this.userInformation.username = response.data.user.username;
-                    this.userInformation.avatarUrl = response.data.user.avatarUrl;
+                    const imageData = response.data.user.image;
+                    if(imageData != null) {
+                      this.userInformation.avatarUrl  = 'data:image/jpg;base64,'+imageData;
+                    }
+                  }else{
+                    if(this.result=='tokenInvalid') {
+                      this.$router.push('/login');
+                    }
                   }
-
                 },
                 (error) =>{
                   this.result = error.response.data;
                 }
         )
+      },
+      updateGrid(){
+        if (typeof this.$redrawVueMasonry === 'function') {
+          this.$redrawVueMasonry()
+        }
       },
       getPosts() {
         HTTP.post('/post/get', {
@@ -173,7 +202,7 @@
         )
       },
       displayNone: function () {
-        this.display='none';
+        setTimeout(()=>{this.display='none'},100);
       },
       displayShow: function () {
         this.display='block';
@@ -187,6 +216,11 @@
   }
 </script>
 <style>
+
+  a{
+    text-decoration: none;
+  }
+
   html{
     font-size: 16px;
   }
@@ -194,6 +228,16 @@
   hr{
     margin-top: 0px;
     color: #000000;
+  }
+
+  .avatar-input{
+    background-image: url("../assets/img/sand.jpg");
+    background-position: center;
+    background-size: 100% 100%;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    margin: auto;
   }
 
   .name-profile{
@@ -445,6 +489,7 @@
     border-radius: 5px;
     color: #002EFF;
     background-color: #FFFFFF;
+    text-decoration: rgba(0,0,0,0);
   }
   .ml-50px{
     margin-left: 50px;
@@ -629,4 +674,14 @@
   main{
     padding-top: 80px;
   }
+
+  .text-follow-none{
+    color:#000000;
+    text-decoration: none;
+    opacity: 0.5;
+    text-align: center;
+    display: block;
+    margin: auto;
+  }
+
 </style>

@@ -2,7 +2,7 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=mysql;dbname=follow',
+    'dsn' => 'mysql:host=mysql;dbname=followTestDB',
     'username' => 'root',
     'password' => 'verysecret',
     'charset' => 'utf8',

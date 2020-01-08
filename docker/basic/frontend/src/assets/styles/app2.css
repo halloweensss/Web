@@ -118,7 +118,6 @@ a:focus{
 }
 
 .avatar-input{
-    background-image: url("../img/sand.jpg");
     background-position: center;
     background-size: 100px 100px;
     width: 100px;

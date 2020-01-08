@@ -1,4 +1,7 @@
 <template>
+    <div>
+    <vue-headful
+            title="Регистрация"/>
     <div class="login-container d-flex align-items-center justify-content-center">
         <form class="login-form" method="send" @submit.prevent="submitHandler">
             <img class="icon-header" src="../assets/img/icon.svg">
@@ -9,11 +12,15 @@
                        :class="{invalid: ($v.login.$dirty && !$v.login.required) || ($v.login.$dirty && !$v.login.maxLength)}"
                        class="form-control input"
                        placeholder="Логин">
-                <small class="helper-text invalid"
+                <small
+                        id = "loginEmpty"
+                        class="helper-text invalid"
                        v-if="$v.login.$dirty && !$v.login.required">
                     Поле не должно быть пустым
                 </small>
-                <small class="helper-text invalid"
+                <small
+                        id = "loginLessCharacters"
+                        class="helper-text invalid"
                        v-else-if="$v.login.$dirty && !$v.login.maxLength">
                     Логин должен быть меньше {{this.maxLengthLogin}} символов
                 </small>
@@ -22,19 +29,25 @@
                 <input id="email"
                        type="text"
                        v-model.trim="email"
-                       :class="{invalid: ($v.email.$dirty && !$v.email.required) || ($v.email.$dirty && !$v.email.email)}"
+                       :class="{invalid: ($v.email.$dirty && !$v.email.required) || ($v.email.$dirty && !$v.email.email) || this.result === 'userExists'}"
                        class="form-control input"
                        placeholder="Электронный адрес">
-                <small class="helper-text invalid"
+                <small
+                        id = "emailEmpty"
+                        class="helper-text invalid"
                        v-if="$v.email.$dirty && !$v.email.required">
                     Поле не должно быть пустым
                 </small>
-                <small class="helper-text invalid"
+                <small
+                        id = "emailIncorrect"
+                        class="helper-text invalid"
                        v-else-if="$v.email.$dirty && !$v.email.email">
                     Введите корректный электронный адрес
                 </small>
-                <small class="helper-text invalid"
-                       v-else-if="this.result == 'userExists'">
+                <small
+                        if="userExist"
+                        class="helper-text invalid"
+                       v-else-if="this.result === 'userExists'">
                     Пользователь с таким адресом уже существует
                 </small>
             </div>
@@ -45,19 +58,61 @@
                        :class="{invalid: ($v.password.$dirty && !$v.password.required) || ($v.password.$dirty && !$v.password.minLength)}"
                        class="form-control input"
                        placeholder="Пароль">
-                <small class="helper-text invalid"
+                <small
+                        id="passwordLessCharacter"
+                        class="helper-text invalid"
                        v-if="($v.password.$dirty && !$v.password.minLength) ||($v.password.$dirty && !$v.password.required)">
                     Пароль должен быть не менее {{this.minLengthPassword}} символов
                 </small>
-
             </div>
             <div class="form-group">
-                <input type="submit" class="form-control input submit" value="Регистрация" required>
+                <select id = "gender"
+                        v-model.trim="gender"
+                        :class="{invalid: ($v.gender.$dirty && !$v.gender.required)}"
+                        class="custom-select">
+                    <option value="" selected>Ваш пол...</option>
+                    <option value="man">Мужчина</option>
+                    <option value="woman">Женщина</option>
+                    <option value="custom">Другой</option>
+                </select>
+                <small
+                        id = "genderEmpty"
+                        class="helper-text invalid"
+                       v-if="$v.gender.$dirty && !$v.gender.required">
+                    Поле не должно быть пустым
+                </small>
+            </div>
+            <div class="text-from">Откуда Вы о нас узнали?</div>
+            <div class="form-group">
+                <div class="btn-group btn-group-toggle" id="fromToggle" data-toggle="buttons">
+                    <label class="btn btn-secondary radio-button active" id="noneRadio">
+                        <input type="radio" name="options"  @click="radioChecked('none')" autocomplete="off" checked> Не указано
+                    </label>
+                    <label class="btn btn-secondary radio-button" id="socialRadio">
+                        <input type="radio" name="options"  @click="radioChecked('social')" autocomplete="off"> Соц. сети
+                    </label>
+                    <label class="btn btn-secondary radio-button" id="friendsRadio">
+                        <input type="radio" name="options" @click="radioChecked('friends')" autocomplete="off"> Друзья
+                    </label>
+                </div>
+            </div>
+            <template v-if="this.fromName == 'social'">
+            <div class="form-group">
+                <input id="social"
+                       v-model.trim="nameService"
+                       type="text"
+                       class="form-control input"
+                       placeholder="Название социальной сети">
+            </div>
+            </template>
+            <div class="form-group">
+                <input type="submit" id="register" class="form-control input submit" value="Регистрация" required>
             </div>
             <router-link to="/login">
-                <a>Отмена</a>
+                <a id="exit">Отмена</a>
             </router-link>
         </form>
+    </div>
     </div>
 </template>
 
@@ -72,6 +127,9 @@
                 login: '',
                 email: '',
                 password: '',
+                fromName:'none',
+                nameService:'',
+                gender:'',
                 minLengthPassword: 6,
                 maxLengthLogin: 20,
                 result:''
@@ -80,9 +138,13 @@
         validations: {
             email: {email, required},
             password : {required, minLength: minLength(6)},
-            login: {required, maxLength:maxLength(20)}
+            login: {required, maxLength:maxLength(20)},
+            gender:{required}
         },
         methods:{
+            radioChecked(name){
+                this.fromName = name;
+            },
             getCookie(name){
                 var results = document.cookie.match ( '(^|;) ?' + name + '=([^;]*)(;|$)' );
                 if ( results )
@@ -100,7 +162,9 @@
                     password: this.password,
                     accessToken: null,
                     authKey: null,
-                    image: null
+                    image: null,
+                    gender: this.gender,
+                    cameFrom: this.fromName == 'social' ? (this.nameService.length == 0 ? this.fromName : this.nameService) : this.fromName,
                 }).then(
                     (response) => {
                         this.result = response.data.status;
@@ -251,4 +315,59 @@
     .input:focus{
         box-shadow: 0 0 1px 2px rgba(108,113,248,.5);
     }
+
+
+    .radio-button{
+        background-color: #6C71F8;
+        color: #FFFFFF;
+        border: none;
+    }
+
+    .radio-button:hover,
+    .radio-button:focus{
+        background-color: #6C51B9;
+        color: #FFFFFF;
+        border: none;
+        box-shadow: none;
+    }
+
+    .btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle{
+        background-color: #2ADE3F;
+        border: none;
+    }
+
+    .btn-group{
+        display: flex;
+    }
+
+    .text-from{
+        color:#000000;
+        text-decoration: none;
+        opacity: 0.5;
+        text-align: center;
+        display: block;
+        margin: auto;
+    }
+
+    .custom-select{
+        display: flex;
+        font-size: 15px;
+        border-radius: 5px;
+        border: none;
+        opacity: 1;
+    }
+
+    .custom-select:focus{
+        box-shadow: 0 0 1px 2px rgba(108,113,248,.5);
+    }
+
+    .custom-select.invalid{
+        border: 1px solid rgba(243,33,89,.5);
+    }
+
+    .custom-select.invalid:focus{
+        box-shadow: 0 0 2px 1px rgba(243,33,89,.5);
+        border: 1px solid rgba(243,33,89,.1);
+    }
+
 </style>

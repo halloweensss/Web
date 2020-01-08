@@ -1,13 +1,13 @@
 <template>
-    <div class="d-flex follow-card">
+    <div class="d-flex follow-card" :id = followUser.username>
         <div class="d-flex follow-card-margin">
             <InstagramFollowCard v-if="followUser.serviceName == 'instagram'" v-bind:profile-url="followUser.profileUrl"/>
             <TelegramFollowCard v-else-if="followUser.serviceName == 'telegram'" v-bind:profile-url="followUser.profileUrl"/>
             <a class="follow-nickname" :href="followUser.profileUrl">
                 {{followUser.username}}
             </a>
-            <FollowButton v-if="followUser.follow == false" v-bind:follow-user="followUser"/>
-            <UnfollowButton v-else-if="followUser.follow == true" v-bind:follow-user="followUser"/>
+            <FollowButton v-if="followUser.follow == false" v-bind:follow-user="followUser" v-on:follow-update="followUpdate"/>
+            <UnfollowButton v-else-if="followUser.follow == true" v-bind:follow-user="followUser" v-on:unfollow-update="unfollowUpdate"/>
         </div>
     </div>
 </template>
@@ -24,6 +24,14 @@
             followUser:{
                 type: Object,
                 required: true
+            }
+        },
+        methods:{
+            followUpdate(){
+                this.$emit('follow-update');
+            },
+            unfollowUpdate(){
+                this.$emit('unfollow-update');
             }
         }
     }

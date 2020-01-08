@@ -14,8 +14,10 @@ use Yii;
  * @property string $accessToken
  * @property string $authKey
  * @property string $createdAt
- * @property string|null $updateAt
+ * @property string|null $updatedAt
  * @property string|null $avatarImage
+ * @property string $gender
+ * @property string|null $cameFrom
  *
  * @property InstagramFollow[] $instagramFollows
  * @property TelegramFollow[] $telegramFollows
@@ -36,12 +38,13 @@ class User extends BaseModel
     public function rules()
     {
         return [
-            [['login', 'email', 'password'], 'required'],
+            [['login', 'email', 'password', 'gender'], 'required'],
             [['createdAt', 'updateAt'], 'safe'],
             [['avatarImage'], 'string'],
             [['login'], 'string', 'max' => 20],
-            [['email', 'password'], 'string', 'max' => 60],
+            [['email', 'password', 'cameFrom'], 'string', 'max' => 60],
             [['accessToken', 'authKey'], 'string', 'max' => 128],
+            [['gender'], 'string', 'max' => 10],
         ];
     }
 
@@ -58,8 +61,10 @@ class User extends BaseModel
             'accessToken' => 'Access Token',
             'authKey' => 'Auth Key',
             'createdAt' => 'Created At',
-            'updateAt' => 'Update At',
+            'updatedAt' => 'Updated At',
             'avatarImage' => 'Avatar Image',
+            'gender' => 'Gender',
+            'cameFrom' => 'Came From',
         ];
     }
 

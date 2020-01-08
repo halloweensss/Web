@@ -7,8 +7,12 @@ use app\components\InstagramHelper;
 use app\models\InstagramAccount;
 use app\models\InstagramFollow;
 use app\models\User;
+use yii\helpers\FileHelper;
+use yii\helpers\Html;
+use yii\imagine\Image;
 use yii\rest\Controller;
 use yii\web\UploadedFile;
+use function MongoDB\BSON\toJSON;
 
 class UserController extends BaseController
 {
@@ -46,6 +50,8 @@ class UserController extends BaseController
         $user->login = $data['login'];
         $user->email = $data['email'];
         $user->password = $data['password'];
+        $user->gender = $data['gender'];
+        $user->cameFrom = $data['cameFrom'];
         if(!$user->save())
             return ['status'=>'userNotCreated'];
 
@@ -63,11 +69,19 @@ class UserController extends BaseController
             $user = User::findIdentityByAccessToken($accessToken);
             if($user == null)
                 return['status'=>'tokenInvalid'];
+        }else{
+            return['status'=>'tokenInvalid'];
+        }
+        $image = null;
+        if($user->avatarImage!=null) {
+            $image = file_get_contents($user->avatarImage);
+            $image = base64_encode($image);
         }
         $item = [
             'username' => $user->login,
-            'avatarUrl' => $user->avatarImage
+            'image' => $image,
         ];
+
         return['status'=>'success',
             'user' => $item];
     }
@@ -122,8 +136,10 @@ class UserController extends BaseController
     public function actionUpdate()
     {
         $loginData = \Yii::$app->request->getBodyParams();
+        $file = UploadedFile::getInstanceByName('avatarImage');
         if($loginData==null)
             return ['status'=>'empty'];
+
         $model = new User();
         $model->load($loginData, '');
 
@@ -135,11 +151,24 @@ class UserController extends BaseController
                 return ['status' => 'invalidToken'];
             }
         }
+
         $user->login = $model->login;
+
         if($model->password != null) {
             $user->setPassword($model->password);
         }
-        //TODO: добавить аватарку
+
+        if($file!=null){
+            if(file_exists($user->avatarImage)) {
+                unlink($user->avatarImage);
+            }
+
+            $path = ImageHelper::create($file);
+
+            $file->saveAs($path);
+            $user->avatarImage = $path;
+        }
+
         if(!$user->save())
             return ['status' => 'failed'];
         return ['status' => 'success'];

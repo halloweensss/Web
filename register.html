@@ -29,6 +29,31 @@
                 <input type="password" class="form-control input" placeholder="Пароль" required>
             </div>
             <div class="form-group">
+                <select class="custom-select" id="inlineFormCustomSelectPref">
+                    <option selected>Ваш пол...</option>
+                    <option value="man">Мужчина</option>
+                    <option value="woman">Женщина</option>
+                    <option value="custom">Другой</option>
+                </select>
+            </div>
+            <a>Откуда Вы о нас узнали?</a>
+            <div class="form-group">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary radio-button active">
+                        <input type="radio" name="options" id="option1" autocomplete="off" checked> Не указано
+                    </label>
+                    <label class="btn btn-secondary radio-button">
+                        <input type="radio" name="options" id="option2" autocomplete="off"> Соц. сети
+                    </label>
+                    <label class="btn btn-secondary radio-button">
+                        <input type="radio" name="options" id="option3" autocomplete="off"> Друзья
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control input" placeholder="Название социальной сети" required>
+            </div>
+            <div class="form-group">
                 <input type="submit" class="form-control input submit" value="Регистрация" required>
             </div>
             <div>

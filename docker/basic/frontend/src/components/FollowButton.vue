@@ -1,7 +1,7 @@
 <template>
     <div class="margin-button">
-        <button class="btn btn-primary follow-button" type="button"  @click="acceptFollow">Подписаться</button>
-        <button class="btn btn-primary follow-button min" type="button"  @click="acceptFollow"><i class="fas fa-check"></i></button>
+        <button class="btn btn-primary follow-button" type="button" @mousedown="acceptFollow" >Подписаться</button>
+        <button class="btn btn-primary follow-button min" type="button" @mousedown="acceptFollow" ><i class="fas fa-check"></i></button>
     </div>
 </template>
 
@@ -32,7 +32,7 @@
                 }).then(
                     (response) => {
                         if (response.data.status == 'success') {
-                            this.$router.update();
+                            this.$emit('follow-update');
                         }
                     },
                     (error) => {

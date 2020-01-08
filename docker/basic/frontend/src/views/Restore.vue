@@ -1,4 +1,6 @@
 <template>
+    <div>
+        <vue-headful title="Восстановление"/>
     <div class="login-container d-flex align-items-center justify-content-center">
         <form class="login-form" method="send" @submit.prevent="submitHandler">
             <img class="icon-header" src="../assets/img/icon.svg">
@@ -10,10 +12,12 @@
                        class="form-control input"
                        placeholder="Электронный адрес">
                 <small
+                        id = "emailEmpty"
                         class="helper-text invalid"
                         v-if="$v.email.$dirty && !$v.email.required"
                 >Поле не должно быть пустым</small>
                 <small
+                        id="emailIncorrect"
                         class="helper-text invalid"
                         v-else-if="$v.email.$dirty && !$v.email.email"
                 >Введите корректный электронный адрес</small>
@@ -27,6 +31,7 @@
                 </router-link>
             </div>
         </form>
+    </div>
     </div>
 </template>
 

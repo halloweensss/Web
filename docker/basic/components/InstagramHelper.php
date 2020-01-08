@@ -11,9 +11,9 @@ class InstagramHelper
 
         $account = $instagram->getAccount($name);
 
-        //$medias= $instagram->getPaginateMediasByUserId($account->getId(),2,$pagintate);
+        //$medias= $instagram->getPaginateMediasByUserId($account->getId(),5,$pagintate);
         //$medias = $instagram->getPaginateMedias($name,$pagintate);
-        $medias = $instagram->getMedias($name);
+        $medias = $instagram->getMedias($name,5);
         $result = [];
         foreach ($medias as $media){
             //$url = $media->getLink();

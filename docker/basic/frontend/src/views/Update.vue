@@ -1,4 +1,6 @@
 <template>
+    <div>
+        <vue-headful title="Обновление"/>
     <div class="login-container d-flex align-items-center justify-content-center">
         <form class="login-form" method="post" enctype="multipart/form-data" @submit.prevent="submitHandler">
             <div class="form-group">
@@ -22,11 +24,15 @@
                        :class="{invalid: ($v.login.$dirty && !$v.login.required) || ($v.login.$dirty && !$v.login.maxLength)}"
                        class="form-control input"
                        placeholder="Логин">
-                <small class="helper-text invalid"
+                <small
+                        id="loginEmpty"
+                        class="helper-text invalid"
                        v-if="$v.login.$dirty && !$v.login.required">
                     Поле не должно быть пустым
                 </small>
-                <small class="helper-text invalid"
+                <small
+                        id="loginLessCharacter"
+                        class="helper-text invalid"
                        v-else-if="$v.login.$dirty && !$v.login.maxLength">
                     Логин должен быть меньше {{this.maxLengthLogin}} символов
                 </small>
@@ -38,23 +44,26 @@
                        :class="{invalid: this.password.length > 0 && ($v.password.$dirty && !$v.password.minLength)}"
                        class="form-control input"
                        placeholder="Новый пароль">
-                <small class="helper-text invalid"
+                <small
+                        id="passwordLessCharacter"
+                        class="helper-text invalid"
                        v-if="(this.password.length > 0 && ( !$v.password.minLength))">
                     Пароль должен быть не менее {{this.minLengthPassword}} символов
                 </small>
             </div>
             <div class="form-group">
-                <input type="submit" class="form-control input submit" value="Сохранить">
+                <input id="submit" type="submit" class="form-control input submit" value="Сохранить">
             </div>
             <router-link to="/">
-                <a href="index.html">Назад</a>
+                <a id="exit" href="index.html">Назад</a>
             </router-link>
         </form>
+    </div>
     </div>
 </template>
 
 <script>
-    import HTTP from "../components/http";
+    import {HTTPData} from "../components/http";
     import {required, minLength, maxLength} from "vuelidate/lib/validators"
     export default {
         name: "Update",
@@ -77,21 +86,21 @@
         },
         methods:{
             updateInformationProfile(){
-                HTTP.post('/user/update', {
-                    accessToken: this.getCookie('accessToken'),
-                    password: this.password.length > 0 ? this.password: null,
-                    login: this.login
-                }).then(
+                const data = new FormData();
+                data.append('accessToken', this.getCookie('accessToken'));
+                data.append('password', this.password);
+                data.append('login', this.login);
+                data.append('avatarImage', this.image);
+                HTTPData.post('/user/update',
+                    data).then(
                     (response) => {
                         this.result = response.data.status;
                         if(this.result == 'success'){
                             this.$router.push('/update');
                         }
-                    },
-                    (error) =>{
-                        this.result = error.response.data;
-                    }
-                )
+                    }).catch(error => {
+                        console.log(error);
+                });
             },
             getCookie(name){
                 var results = document.cookie.match ( '(^|;) ?' + name + '=([^;]*)(;|$)' );
@@ -101,24 +110,30 @@
                     return null;
             },
             getProfileInfo(){
-                HTTP.post('/user/get-profile', {
-                    accessToken: this.getCookie('accessToken')
-                }).then(
+                const data = new FormData();
+                data.append('accessToken', this.getCookie('accessToken'));
+                HTTPData.post('/user/get-profile', data).then(
                     (response) => {
                         this.result = response.data.status;
                         if(this.result == 'success'){
                             this.login = response.data.user.username;
-                            this.imageSrc = response.data.user.avatarUrl;
+                            const imageData = response.data.user.image;
+                            if(imageData != null) {
+                                this.image = imageData;
+                                this.imageSrc = 'data:image/jpg;base64,'+imageData;
+                            }
+                        }else{
+                            if(this.result=='tokenInvalid') {
+                                this.$router.push('/login');
+                            }
                         }
                     },
                     (error) =>{
                         this.result = error.response.data;
-                        console.log(error.response.data.result);
                     }
                 )
             },
             submitHandler(){
-                console.log(this.password.length);
                 if(this.$v.$invalid){
                     this.$v.$touch();
                     return;
@@ -131,7 +146,6 @@
                 const reader = new FileReader();
                 reader.onload = () => {
                     this.imageSrc = reader.result;
-                    console.log(this.imageSrc);
                 };
                 reader.readAsDataURL(file);
                 this.image = file;
@@ -236,7 +250,6 @@
     }
 
     .avatar-input{
-        background-image: url("../assets/img/sand.jpg");
         background-position: center;
         background-size: 100px 100px;
         width: 100px;
