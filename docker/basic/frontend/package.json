@@ -14,6 +14,7 @@
     "core-js": "^3.4.3",
     "font-awesome": "^4.7.0",
     "jquery": "^3.4.1",
+    "lodash": "^4.17.15",
     "vee-validate": "^3.2.1",
     "vue-bootstrap-typeahead": "^0.2.6",
     "vue-headful": "^2.1.0",

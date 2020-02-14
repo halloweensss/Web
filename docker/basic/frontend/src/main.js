@@ -7,6 +7,7 @@ import BootstrapVue from 'bootstrap-vue'
 import Vuelidate from "vuelidate/src";
 import vueHeadful from 'vue-headful'
 
+
 Vue.use(Vuelidate);
 Vue.use(BootstrapVue);
 Vue.use(VueMasonryPlugin);

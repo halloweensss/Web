@@ -132,7 +132,8 @@
                 gender:'',
                 minLengthPassword: 6,
                 maxLengthLogin: 20,
-                result:''
+                result:'',
+                query:''
             };
         },
         validations: {

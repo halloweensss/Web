@@ -55,7 +55,7 @@
       <div class="tab-pane fade show" id="pills-follow" role="tabpanel" aria-labelledby="pills-follow-tab">
         <div class="container">
           <div class="col-12 d-flex flex-wrap p-0">
-            <input class="form-control search-input" type="search" v-model.trim="searchNickname" placeholder="Поиск" id="SuggestionInput" aria-label="Search" @focusin="displayShow" @change="findFollows" @focusout="displayNone">
+            <input class="form-control search-input" type="search" v-model.trim="searchNickname" placeholder="Поиск" id="SuggestionInput" aria-label="Search" @focusin="displayShow" @input="findFollowsThrottled" @focusout="displayNone">
           </div>
         </div>
         <div class="container">
@@ -85,6 +85,8 @@
   import AlreadyFollowCard from "../components/AlreadyFollowCard";
   import PostLoader from "../components/PostLoader";
   import HTTP, {HTTPData} from "../components/http";
+  import _ from 'lodash'
+
   export default {
     components: {PostLoader, AlreadyFollowCard, FollowCard, Post},
     data(){
@@ -115,7 +117,10 @@
         this.findFollows();
         this.updateGrid();
       },
-      findFollows(){
+      findFollowsThrottled: _.throttle(function () {
+        this.findFollows();
+      },2000),
+      findFollows: function(){
         HTTP.post('/user/get-followers-not-exist', {
           accessToken: this.getCookie('accessToken'),
           name: this.searchNickname
