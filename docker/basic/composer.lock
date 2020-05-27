@@ -11,7 +11,7 @@
             "version": "v3.4.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/twbs/bootstrap.git",
+                "url": "git@github.com:twbs/bootstrap.git",
                 "reference": "68b0d231a13201eb14acd3dc84e51543d16e5f7e"
             },
             "dist": {
@@ -32,7 +32,7 @@
             "version": "3.3.11",
             "source": {
                 "type": "git",
-                "url": "https://github.com/RobinHerbots/Inputmask.git",
+                "url": "git@github.com:RobinHerbots/Inputmask.git",
                 "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b"
             },
             "dist": {
@@ -86,7 +86,7 @@
             "version": "v2.0.7",
             "source": {
                 "type": "git",
-                "url": "git@github.com:yiisoft/jquery-pjax.git",
+                "url": "https://github.com/yiisoft/jquery-pjax.git",
                 "reference": "885fc8c2d36c93a801b6af0ee8ad55d79df97cb1"
             },
             "dist": {
@@ -433,16 +433,16 @@
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v6.1.4",
+            "version": "v6.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "c5e61d0729507049cec9673aa1a679f9adefd683"
+                "reference": "c2796cb1cb99d7717290b48c4e6f32cb6c60b7b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/c5e61d0729507049cec9673aa1a679f9adefd683",
-                "reference": "c5e61d0729507049cec9673aa1a679f9adefd683",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/c2796cb1cb99d7717290b48c4e6f32cb6c60b7b3",
+                "reference": "c2796cb1cb99d7717290b48c4e6f32cb6c60b7b3",
                 "shasum": ""
             },
             "require": {
@@ -491,7 +491,7 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2019-12-10T11:17:38+00:00"
+            "time": "2020-05-27T12:24:03+00:00"
         },
         {
             "name": "psr/simple-cache",
@@ -1273,18 +1273,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/Codeception.git",
-                "reference": "03d7e33c155bf9da306f0209d520fb8423f6dd67"
+                "reference": "ffc951ed077eb48203e033675d32e9b8dcd80fc7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/03d7e33c155bf9da306f0209d520fb8423f6dd67",
-                "reference": "03d7e33c155bf9da306f0209d520fb8423f6dd67",
+                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/ffc951ed077eb48203e033675d32e9b8dcd80fc7",
+                "reference": "ffc951ed077eb48203e033675d32e9b8dcd80fc7",
                 "shasum": ""
             },
             "require": {
                 "behat/gherkin": "^4.4.0",
                 "codeception/lib-asserts": "^1.0",
-                "codeception/phpunit-wrapper": ">6.0.15 <6.1.0 | ^6.6.1 | ^7.7.1 | ^8.1.0",
+                "codeception/phpunit-wrapper": ">6.0.15 <6.1.0 | ^6.6.1 | ^7.7.1 | ^8.1.1",
                 "codeception/stub": "^2.0 | ^3.0",
                 "ext-curl": "*",
                 "ext-json": "*",
@@ -1350,7 +1350,7 @@
                 "functional testing",
                 "unit testing"
             ],
-            "time": "2019-12-19T16:52:50+00:00"
+            "time": "2020-01-24T07:23:42+00:00"
         },
         {
             "name": "codeception/lib-asserts",
